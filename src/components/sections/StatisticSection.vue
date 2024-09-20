@@ -15,11 +15,11 @@
                     <p class="text-2xl font-gilroy-semibold text-darkGray">Bitirgan o’quvchilarimiz</p>
                 </div>
                 <div class="flex flex-col text-center gap-3 animation-fade-in">
-                    <p class="text-6xl font-gilroy-semibold">14+</p>
+                    <p class="text-6xl font-gilroy-semibold">{{ yearsOfExperience }}+</p>
                     <p class="text-2xl font-gilroy-semibold text-darkGray">Yil tajriba</p>
                 </div>
                 <div class="flex flex-col text-center gap-3 animation-fade-in">
-                    <p class="text-6xl font-gilroy-semibold">18+</p>
+                    <p class="text-6xl font-gilroy-semibold">25+</p>
                     <p class="text-2xl font-gilroy-semibold text-darkGray">Programmani o’rgatish</p>
                 </div>
             </div>
@@ -28,9 +28,11 @@
 </template>
 
 <script setup>
-
 import HeadingThree from "@/components/UI/HeadingThree.vue";
 import HeadingOne from "@/components/UI/HeadingOne.vue";
+import {computed} from "vue";
+
+const yearsOfExperience = computed(() => new Date().getFullYear() - new Date((new Date().setFullYear(2010))).getFullYear());
 </script>
 
 <style scoped>

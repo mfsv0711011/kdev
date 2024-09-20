@@ -107,8 +107,8 @@
         <div class="w-full bg-[#1E1E1E]">
             <div class="container">
                 <div class="flex items-center justify-between py-6 lg:py-8 font-gilroy-medium text-white">
-                    <p class="text-sm md:text-2xl text-center w-full">
-                        &copy; KadirovDev, <a class="text-purple" target="_blank" href="https://kadirov.dev/public-offer">Ommaviy offerta</a>
+                    <p class="text-sm md:text-2xl text-center w-full selection:text-dark selection:bg-white">
+                        &copy; KadirovDev, <a class="text-purple selection:text-dark selection:bg-purple" target="_blank" href="https://kadirov.dev/public-offer">Ommaviy offerta</a>
                     </p>
                 </div>
             </div>

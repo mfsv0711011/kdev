@@ -1,47 +1,38 @@
 <template>
     <div id="contact" class=" pt-[50px]"></div>
-    <section class="py-[50px] lg:py-[100px] bg-[#1E1E1E]">
+    <section class="py-[50px] lg:py-[100px] bg-[#1E1E1E] selection:text-dark selection:bg-white">
         <div class="container flex flex-col gap-5 lg:gap-[50px]">
             <div class="flex flex-col gap-2.5 lg:gap-5 animation-fade-in">
                 <h4 class="text-white text-center lg:text-start text-2xl lg:text-[35px] font-gilroy-semibold">Biz bilan bog'lanish</h4>
 <!--                <p class="text-white">{{requestForCallStore.isLoading}}, {{requestForCallStore.error}}, {{requestForCallStore.response}}</p>-->
                 <div class="grid grid-cols-2 lg:flex-row gap-2.5 lg:gap-5">
-                    <input
-                        :class="{'ring-1 ring-red-600': hasError, 'ring-white/70': !hasError}"
-                        v-model.trim="form.fullName"
-                        type="text"
-                        class="animation-fade-in outline-none focus:ring-1 focus:ring-white/70 w-full text-white rounded bg-[#323232] px-4 lg:px-5 py-4 lg:py-5 text-xl lg:text-2xl font-gilroy-medium"
-                        placeholder="Ism Sharif"
-                    >
-                    <input
-                        :class="{'ring-1 ring-red-600': hasError, 'ring-white/70': !hasError}"
-                        v-model.trim="form.phone"
-                        type="text"
-                        class="animation-fade-in outline-none focus:ring-1 focus:ring-white/70 w-full text-white rounded bg-[#323232] px-4 lg:px-5 py-4 lg:py-5 text-xl lg:text-2xl font-gilroy-medium"
-                        placeholder="+998 -- --- -- --"
-                    >
-                    <input
-                        :class="{'ring-1 ring-red-600': hasError, 'ring-white/70': !hasError}"
-                        v-model.trim="form.telegramUsername"
-                        type="text"
-                        class="animation-fade-in outline-none focus:ring-1 focus:ring-white/70 w-full text-white rounded bg-[#323232] px-4 lg:px-5 py-4 lg:py-5 text-xl lg:text-2xl font-gilroy-medium"
-                        placeholder="@username"
-                    >
-                    <textarea
-                        :class="{'ring-1 ring-red-600': hasError, 'ring-white/70': !hasError}"
-                        v-model.trim="form.message"
-                        rows="5"
-                        class="animation-fade-in outline-none col-span-2 focus:ring-1 focus:ring-white/70 w-full text-white rounded bg-[#323232] px-4 lg:px-5 py-4 lg:py-5 text-xl lg:text-2xl font-gilroy-medium"
-                        placeholder="Xabaringizni qoldiring..."
-                    />
+                    <div class="flex flex-col gap-2.5 lg:gap-5 col-span-2 lg:col-span-1">
+                        <KInput
+                            v-model="fullName"
+                            placeholder="Ism Sharif"
+                            :error-message="errors.fullName"
+                        />
+                        <KInput
+                            class="text-white text-xl"
+                            v-model="phone"
+                            placeholder="+998991234567"
+                            :error-message="errors.phone"
+                        />
+                        <KInput
+                            v-model="telegramUsername"
+                            placeholder="@telegramusername"
+                            :error-message="errors.telegramUsername"
+                        />
+                    </div>
+                    <KTextarea class="col-span-2 lg:col-span-1" v-model="message" placeholder="Xabaringizni qoldiring..." :error-message="errors.message" />
                     <button
-                        @click="sendRequestForCall"
+                        @click="check"
                         :disabled="requestForCallStore.isLoading"
                         :class="{
                             'bg-[#cccccc] text-[#666666]': requestForCallStore.isLoading,
                             'text-dark bg-white': !requestForCallStore.isLoading
                         }"
-                        class="animation-fade-in h-fit mt-auto col-span-2 w-fit ml-auto rounded text-xl lg:text-2xl font-gilroy-medium flex justify-center items-center px-[100px] py-4 lg:py-5"
+                        class="animation-fade-in h-fit mt-auto col-span-2 w-full lg:w-fit ml-auto rounded text-xl lg:text-2xl font-gilroy-medium flex justify-center items-center px-[100px] py-4 lg:py-5"
                     >
                         <div v-if="requestForCallStore.isLoading" class="h-7 w-[94px] flex justify-center items-center">
                             <svg class="animate-spin size-5 lg:size-6 text-purple" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
@@ -78,61 +69,50 @@
 import HeadingOne from "@/components/UI/HeadingOne.vue";
 import HeadingTwo from "@/components/UI/HeadingTwo.vue";
 import {useRequestForCallStore} from "@/stores/modules/requestForCall.js";
-import {reactive, ref} from "vue";
 import {useToast} from "vue-toastification";
+import KInput from "@/components/UI/KInput.vue";
+import {useField, useForm} from "vee-validate";
+import { object, string } from 'yup'
+import KTextarea from "@/components/UI/KTextarea.vue";
 
 const requestForCallStore = useRequestForCallStore()
 const toast = useToast()
 
-const form = reactive({
-    fullName: '',
-    phone: '',
-    message: '',
-    telegramUsername: ''
+const schema = object({
+    fullName: string().required('Qatorni to\'diring.').min(2, 'Kamida 2ta belgidan iborat bo\'lishi kerak.'),
+    phone: string()
+        .required('Qatorni to\'diring.')
+        .test('is-valid-phone', 'Telefon raqam \'+\' belgisi bilan boshlanishi kerak va raqamlardan iborat bo\'lishi kerak', val => {
+            return val.match(/^\+\d+$/)
+        })
+    ,
+    telegramUsername: string()
+        .required('Qatorni to\'diring.')
+        .min(5, 'Kamida 5ta belgidan iborat bo\'lishi kerak.')
+        .test('is-valid-username', 'Username \'@\' belgisi bilan boshlanishi kerak', val => {
+            return val.startsWith('@')
+        }),
+    message: string().required('Qatorni to\'diring.').min(16, 'Kamida 15ta belgidan iborat bo\'lishi kerak.'),
 })
 
-const hasError = ref(false)
+const { handleSubmit, errors } = useForm({ validationSchema: schema })
 
-const sendRequestForCall = async () => {
-    hasError.value = false
-    if (form.fullName && form.phone) {
-        try {
-            await requestForCallStore.pushRequestForCall(form)
+const check = handleSubmit(async (values, { resetForm }) => {
+    try {
+        await requestForCallStore.pushRequestForCall(values)
 
-            form.fullName = ''
-            form.phone = ''
-            form.message = ''
-            toast.success('Xabaringiz muvofaqqiyatli yuborildi!\nTez orada operatorlarimiz sizga aloqaga chiqishadi.')
-            hasError.value = false
-        } catch (err) {
-            toast.error(requestForCallStore.error)
-        }
-    } else {
-        toast.error('Maydonlarni to\'ldiring!')
-        hasError.value = true
+        resetForm()
+        toast.success('Xabaringiz muvofaqqiyatli yuborildi!\nTez orada operatorlarimiz sizga aloqaga chiqishadi.')
+    } catch (err) {
+        toast.error(requestForCallStore.error)
     }
-}
+})
 
-const countryCode = ref('+1');
-const phoneNumber = ref('');
-const phoneMask = ref('(###) ###-####'); // Default mask for USA
+const { value: fullName } = useField('fullName')
+const { value: phone } = useField('phone')
+const { value: telegramUsername } = useField('telegramUsername')
+const { value: message } = useField('message')
 
-const updateMask = () => {
-    switch (countryCode.value) {
-        case '+1': // USA
-            phoneMask.value = '(###) ###-####';
-            break;
-        case '+44': // UK
-            phoneMask.value = '#### ### ####';
-            break;
-        case '+33': // France
-            phoneMask.value = '## ## ## ## ##';
-            break;
-        // Qo'shimcha mamlakatlar uchun maskalar
-        default:
-            phoneMask.value = '(###) ###-####'; // Default mask
-    }
-}
 </script>
 
 <style scoped>

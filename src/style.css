@@ -47,3 +47,7 @@
     background: #7F56D9CC;
     border-radius: 10px;
 }
+*::selection {
+    background: #222222;
+    color: white;
+}

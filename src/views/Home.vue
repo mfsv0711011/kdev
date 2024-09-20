@@ -2,8 +2,8 @@
     <div class="" ref="root">
         <MainSection/>
         <StatisticSection/>
-        <CoursesSection/>
-        <CourseInfoSection/>
+        <CoursesSection @onChangeTab="updateCourseTheme"/>
+        <CourseInfoSection :isJuniorCourseTheme/>
         <RoadMapSection/>
         <StudentsProjects/>
         <StudentsFeedbackSection
@@ -33,6 +33,11 @@ const filters = reactive({
     itemsPerPage: 10
 })
 const root = ref(null)
+const isJuniorCourseTheme = ref(true)
+
+const updateCourseTheme = val => {
+    isJuniorCourseTheme.value = val
+}
 
 const allComments = ref({
     models: [],

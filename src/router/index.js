@@ -12,6 +12,14 @@ const router = createRouter({
             },
             component: () => import('@/views/Home.vue'),
         },
+        {
+            path: '/auth',
+            name: 'auth',
+            meta: {
+                layout: defineAsyncComponent(() => import('@/layouts/AuthLayout.vue')),
+            },
+            component: () => import('@/views/TestView.vue'),
+        },
     ],
     scrollBehavior(to, from, savedPosition) {
         if (to.hash) {

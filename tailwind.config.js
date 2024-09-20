@@ -17,6 +17,7 @@ export default {
         'gilroy-bold': 'Gilroy-bold',
       },
       colors: {
+        authBgGray: '#EEF2F5',
         dark: '#222222',
         purple: '#7F56D9',
         gray: '#475467',

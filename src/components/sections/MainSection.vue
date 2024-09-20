@@ -3,8 +3,8 @@
         <div class="container flex flex-col lg:flex-row justify-center">
             <div class="w-full flex items-center">
                 <div class="flex flex-col gap-7 sm:gap-10 xl:gap-14 items-center w-full">
-                    <h1 class="leading-tight text-[28px] md:text-[50px] lg:text-[40px] xl:text-[54px] 2xl:text-[65px] font-gilroy-bold"><span class="text-purple font-gilroy-bold">Dasturlashni</span> o’rganib <br>Hayotingizni o’zgartiring</h1>
-                    <p class="lg:text-2xl font-medium">Biz bilan dasturlashni onlayn tarzda sifatli o’rganing
+                    <h1 class="leading-tight text-[28px] md:text-[50px] lg:text-[40px] xl:text-[54px] 2xl:text-[65px] font-gilroy-bold text-center lg:text-start"><span class="text-purple font-gilroy-bold selection:bg-purple selection:text-white">Dasturlashni</span> o’rganib <br>Hayotingizni o’zgartiring</h1>
+                    <p class="lg:text-2xl font-medium text-center lg:text-start">Biz bilan dasturlashni onlayn tarzda sifatli o’rganing
                         va hayotingizda yangilik oching</p>
                         <KButton class="px-8 hidden lg:block w-fit self-start">
                             <a href="https://kadirov.dev/course#payment:~:text=phpStorm-,Kursga%20yozilish,-Kursni%20tanlang" target="_blank">
@@ -41,6 +41,7 @@
 <script setup>
 
 import KButton from "@/components/UI/KButton.vue";
+import KInput from "@/components/UI/KInput.vue";
 </script>
 
 <style scoped>

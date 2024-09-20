@@ -7,15 +7,15 @@
             </div>
             <div class="flex bg-[#F2F3F5] p-0.5 rounded-md md:rounded-2xl animation-fade-in">
                 <button
-                    @click="isFirstActiveTab = true"
-                    :class="{'shadow bg-white': isFirstActiveTab}"
+                    @click="updateActiveTab(true)"
+                    :class="{'shadow bg-white': isJuniorActiveTab}"
                     class="flex gap-1 justify-center rounded-md md:rounded-2xl transition-all text-sm lg:text-[30px] font-gilroy-semibold py-2.5 px-2 sm:py-4 lg:py-8 w-full"
                 >
                     Junior Full Stack <span class="hidden sm:block font-gilroy-semibold"> Developer</span>
                 </button>
                 <button
-                    @click="isFirstActiveTab = false"
-                    :class="{'shadow bg-white': !isFirstActiveTab}"
+                    @click="updateActiveTab(false)"
+                    :class="{'shadow bg-white': !isJuniorActiveTab}"
                     class="flex gap-1 justify-center rounded-md md:rounded-2xl transition-all text-sm lg:text-[30px] font-gilroy-semibold py-2.5 px-2 sm:py-4 lg:py-8 w-full"
                 >
                     Middle Full Stack <span class="hidden sm:block font-gilroy-semibold"> Developer</span>
@@ -26,9 +26,8 @@
                 leave-active-class="transition-all duration-100 ease-in"
                 enter-from-class="-translate-x-[200px] opacity-0"
                 leave-to-class="-translate-x-[200px] opacity-0"
-                name="slide"
             >
-                <div v-if="isFirstActiveTab" class="grid grid-cols-1 lg:grid-cols-2 gap-[30px]">
+                <div v-if="isJuniorActiveTab" class="grid grid-cols-1 lg:grid-cols-2 gap-[30px]">
                     <div class="flex flex-col gap-[30px]">
                         <div class="flex flex-col gap-2.5 text-dark animation-fa font-gilroy-semiboldde-in">
                             <h4 class="text-xl lg:text-[30px] font-gilroy-semibold animation-fade-in">Kursda qatnashish uchun nimalar kerak bo’ladi?</h4>
@@ -89,9 +88,8 @@
                 leave-active-class="transition-all duration-100 ease-out"
                 enter-from-class="translate-x-[200px] opacity-0"
                 leave-to-class="translate-x-[200px] opacity-0"
-                name="slide"
             >
-                <div v-if="!isFirstActiveTab" class="grid grid-cols-1 lg:grid-cols-2 gap-[30px]">
+                <div v-if="!isJuniorActiveTab" class="grid grid-cols-1 lg:grid-cols-2 gap-[30px]">
                     <div class="flex flex-col gap-[30px]">
                         <div class="flex flex-col gap-2.5 text-dark animation-fa font-gilroy-semiboldde-in">
                             <h4 class="text-xl lg:text-[30px] font-gilroy-semibold animation-fade-in">Kursda qatnashish uchun nimalar kerak bo’ladi?</h4>
@@ -159,7 +157,8 @@ import HeadingOne from "@/components/UI/HeadingOne.vue";
 import HeadingTwo from "@/components/UI/HeadingTwo.vue";
 import {ref} from "vue";
 
-const isFirstActiveTab = ref(true)
+const emit = defineEmits(['onChangeTab'])
+const isJuniorActiveTab = ref(true)
 
 const juniorSkills = [
     { name: 'U.D.T', image: '/skills/junior/umumiy.webp'},
@@ -187,7 +186,7 @@ const middleSkills = [
     { name: 'Cron', image: '/skills/middle/Cron.webp'},
     { name: 'Gitlab CI/CD', image: '/skills/middle/Gitlab CI_DI.webp'},
     { name: 'Design Patterns', image: '/skills/middle/Design Patterns.webp'},
-    { name: 'solid', image: '/skills/middle/solid.webp'},
+    { name: 'SOLID', image: '/skills/middle/solid.webp'},
     { name: 'Redis', image: '/skills/middle/Redis.webp'},
     { name: 'Rabbit MQ', image: '/skills/middle/Rabbit MQ.webp'},
     { name: 'Jobs & Workers', image: '/skills/middle/Jobs & Workers.webp'},
@@ -199,20 +198,12 @@ const middleSkills = [
     { name: 'Vue Advanced', image: '/skills/middle/Vue Advanced.webp'},
 ]
 
+const updateActiveTab = value => {
+    isJuniorActiveTab.value = value
+    emit('onChangeTab', value)
+}
+
 </script>
 
 <style scoped>
-.slide-enter-active {
-    transition: all 0.3s ease-out;
-}
-
-.slide-leave-active {
-    transition: all 0.3s ease-in;
-}
-
-.slide-enter-from,
-.slide-leave-to {
-    transform: translateX(-200px);
-    opacity: 0;
-}
 </style>

@@ -111,11 +111,11 @@
                             </nav>
 
                             <div class="mt-auto">
-                                <div class="flex flex-1 gap-4">
-                                    <a target="_blank" href="https://myblog.uz/author/kadirov/">
-                                        <KButton class="w-full">Tekin kurslar</KButton>
+                                <div class="flex gap-4">
+                                    <a class="w-1/2" target="_blank" href="https://myblog.uz/author/kadirov/">
+                                        <KButton class="w-full text-nowrap">Tekin kurslar</KButton>
                                     </a>
-                                    <button class="w-full bg-[#F5F3F2] h-10 md:h-[54px] rounded-10 text-dark">
+                                    <button class="w-1/2 bg-[#F5F3F2] h-10 md:h-[54px] rounded-10 text-dark">
                                         Kirish
                                     </button>
                                 </div>
