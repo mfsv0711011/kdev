@@ -3,7 +3,7 @@
         <div class="container">
             <div class="gap-4 lg:gap-5 text-center mb-16 animation-fade-in">
                 <HeadingOne>O’quvchilarimizni kurs haqidagi fikri</HeadingOne>
-                <HeadingTwo>Har bir kurs vaqtida o’quvchilar bajargan amaliyot ishlari</HeadingTwo>
+<!--                <HeadingTwo>Har bir kurs vaqtida o’quvchilar bajargan amaliyot ishlari</HeadingTwo>-->
                 <div class="my-10"></div>
             </div>
         </div>

@@ -29,9 +29,9 @@
             >
                 <div v-if="isJuniorActiveTab" class="grid grid-cols-1 lg:grid-cols-2 gap-[30px]">
                     <div class="flex flex-col gap-[30px]">
-                        <div class="flex flex-col gap-2.5 text-dark animation-fa font-gilroy-semiboldde-in">
+                        <div class="flex flex-col lg:text-2xl font-medium gap-2.5 text-dark animation-fade-in font-gilroy-semibold">
                             <h4 class="text-xl lg:text-[30px] font-gilroy-semibold animation-fade-in">Kursda qatnashish uchun nimalar kerak bo’ladi?</h4>
-                            <ul class="lg:text-2xl font-medium list-disc ml-6 flex flex-col gap-1 pt-2">
+                            <ul class="list-disc ml-6 flex flex-col gap-1 pt-2">
                                 <li class="animation-fade-in"><b>Kompyuter, yoki noutbuk</b></li>
                                 <li class="animation-fade-in"> Darslar<b> Zoom, Discord </b> va <b>Telemost</b> dasturlarining biri orqali onlayn tarzda o'tiladi. Siz o’qituvchi va uning elektron doskasini ko’rib turasiz. Ushbu dasturlarni bu yerdan yuklab olishingiz mumkin: <br><a href="https://zoom.us/download" target="_blank">Zoom</a>, <a href="https://discord.com/download" target="_blank">Discord</a>, <a href="https://play.google.com/store/apps/details?id=ru.yandex.telemost&amp;hl=ru&amp;gl=US" target="_blank"> Telemost </a> <br></li>
                                 <li class="animation-fade-in"><b>Internet tezligi</b> video a’loqa qilish uchun yetarli bo’lishi kerak. Tekshirish uchun fast.com saytiga kiring. Tezligingiz yetarli darajada bo’lishi uchun sayt kamida 2 mega bit tezlik ko’rsatishi kerak. </li>
@@ -39,12 +39,16 @@
                             </ul>
 
                             <h4 class="text-xl lg:text-[30px] font-gilroy-semibold animation-fade-in">Kurs haqida</h4>
-                            <ul class="lg:text-2xl font-medium list-disc ml-6 flex flex-col gap-1 pt-2">
+                            <ul class="list-disc ml-6 flex flex-col gap-1 pt-2">
                                 <li class="animation-fade-in"><b>Kurs davomiyligi: </b>5 oy</li>
-                                <li class="animation-fade-in"><b>To’lov turlari: </b>O'zbekistonlik o'quvchilar uzcard yoki Humo kartalari orqali saytimizdan to'lov qilishlari mumkin. Chet eldagi vatandoshlar mastercard yoki visa kartalariga pul o’tkazish orqali to’lovni amalga oshirishlari mumkin bo'ladi.</li>
+<!--                                <li class="animation-fade-in"><b>To’lov turlari: </b>O'zbekistonlik o'quvchilar uzcard yoki Humo kartalari orqali saytimizdan to'lov qilishlari mumkin. Chet eldagi vatandoshlar mastercard yoki visa kartalariga pul o’tkazish orqali to’lovni amalga oshirishlari mumkin bo'ladi.</li>-->
                                 <li class="animation-fade-in"><b>Kurs tili: </b>O’zbekcha</li>
-                                <li class="animation-fade-in"><b>O’qituvchi: </b>Abdulla Tuychiyev</li>
-                                <li class="animation-fade-in"><b>Kursga yozilish uchun: </b>100% oldindan, yoki har oy bo'lib to'lashingiz mumkin.</li>
+<!--                                <li class="animation-fade-in"><b>O’qituvchi: </b>Abdulla Tuychiyev</li>-->
+<!--                                <li class="animation-fade-in"><b>Kursga yozilish uchun: </b>100% oldindan, yoki har oy bo'lib to'lashingiz mumkin.</li>-->
+                            </ul>
+                            <h4 class="text-xl lg:text-[30px] font-gilroy-semibold animation-fade-in">Kursdan maqsad</h4>
+                            <ul class="list-disc ml-6 flex flex-col gap-1 pt-2">
+                                <li class="animation-fade-in">5 oy mobaynida sizga 10 dan ortiq texnologiyalarni o’rgatish. Sizni mustaqil ishlay oladigan professional dasturchiga aylantirish.y</li>
                             </ul>
                         </div>
                         <div class="grid lg:hidden grid-cols-2 sm:grid-cols-3 gap-2.5 lg:gap-[30px]">
@@ -54,9 +58,8 @@
                             </div>
                         </div>
 
-                        <a
-                            href="https://kadirov.dev/course"
-                            target="_blank"
+                        <router-link
+                            :to="{ name: 'courses', params: { slug: 'junior-full-stack-web-developer' } }"
                             class="text-purple text-xl font-semibold hover:bg-purple hover:text-white w-fit group px-2 py-1 rounded transition-all animation-fade-in"
                         >
                             <div class="flex gap-1 items-center">
@@ -67,18 +70,11 @@
                                     <path class="stroke-purple group-hover:stroke-white" d="M14 7L19 12" stroke="#80007F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </div>
-                        </a>
+                        </router-link>
                     </div>
                     <div class="hidden lg:grid grid-cols-2 gap-2.5 lg:gap-[30px] h-fit">
-                        <div
-                            v-for="skill of juniorSkills"
-                            :key="skill.name"
-                            class="bg-white rounded-[10px] p-2.5 lg:p-5 flex items-center gap-1 lg:gap-2.5 shadow-md h-fit animation-fade-in"
-                        >
-                            <div class="size-6 lg:size-10 flex justify-center items-center">
-                                <img class="w-full flex-none" :src="skill.image" alt="html-image">
-                            </div>
-                            <p class="text-xs lg:text-2xl font-gilroy-semibold">{{ skill.name }}</p>
+                        <div v-for="skill of juniorSkills" :key="skill.name">
+                            <Skill :skill/>
                         </div>
                     </div>
                 </div>
@@ -91,21 +87,25 @@
             >
                 <div v-if="!isJuniorActiveTab" class="grid grid-cols-1 lg:grid-cols-2 gap-[30px]">
                     <div class="flex flex-col gap-[30px]">
-                        <div class="flex flex-col gap-2.5 text-dark animation-fa font-gilroy-semiboldde-in">
+                        <div class="flex flex-col gap-2.5 lg:text-2xl font-medium text-dark animation-fade-in font-gilroy-semibold">
                             <h4 class="text-xl lg:text-[30px] font-gilroy-semibold animation-fade-in">Kursda qatnashish uchun nimalar kerak bo’ladi?</h4>
-                            <ul class="lg:text-2xl font-medium list-disc ml-6 flex flex-col gap-1 pt-2">
+                            <ul class="list-disc ml-6 flex flex-col gap-1 pt-2">
                                 <li class="animation-fade-in"><b>"Junior Full Stack Web Developer"</b> kursini tugatgan bo'lishingiz kerak.</li>
                             </ul>
                             <h4 class="text-xl lg:text-[30px] font-gilroy-semibold animation-fade-in">Kurs haqida</h4>
-                            <ul class="lg:text-2xl font-medium list-disc ml-6 flex flex-col gap-1 pt-2">
+                            <ul class="list-disc ml-6 flex flex-col gap-1 pt-2">
                                 <li class="animation-fade-in"><b>Kurs davomiyligi: </b>5 oy</li>
                                 <li class="animation-fade-in"><b>To’lov turlari: </b>O'zbekistonlik o'quvchilar uzcard yoki Humo kartalari orqali saytimizdan to'lov qilishlari mumkin. Chet eldagi vatandoshlar mastercard yoki visa kartalariga pul o’tkazish orqali to’lovni amalga oshirishlari mumkin bo'ladi.</li>
                                 <li class="animation-fade-in"><b>Kurs tili: </b>O’zbekcha</li>
-                                <li class="animation-fade-in"><b>O’qituvchi: </b>Akmal Kadirov</li>
-                                <li class="animation-fade-in"><b>Kursga yozilish uchun: </b>100% oldindan, yoki har oy bo'lib to'lashingiz mumkin.</li>
+<!--                                <li class="animation-fade-in"><b>O’qituvchi: </b>Akmal Kadirov</li>-->
+<!--                                <li class="animation-fade-in"><b>Kursga yozilish uchun: </b>100% oldindan, yoki har oy bo'lib to'lashingiz mumkin.</li>-->
+                            </ul>
+                            <h4 class="text-xl lg:text-[30px] font-gilroy-semibold animation-fade-in">Kursdan maqsad</h4>
+                            <ul class="list-disc ml-6 flex flex-col gap-1 pt-2">
+                                <li class="animation-fade-in">5 oy mobaynida bilimlaringizni oshirib, sizni tajribali Middle dasturchi darajasiga olib chiqish.</li>
                             </ul>
                             <h4 class="text-xl lg:text-[30px] font-gilroy-semibold animation-fade-in">Kursni tugatgach</h4>
-                            <ul class="lg:text-2xl font-medium list-disc ml-6 flex flex-col gap-1 pt-2">
+                            <ul class="list-disc ml-6 flex flex-col gap-1 pt-2">
                                 <li class="animation-fade-in">Bizning kompanyamizda 2 oylik amaliyot (практика) o'taysiz. Bunda siz, kurs davomida olgan bilimlaringizni haqiqiy loyihalarda sinash imkoniga ega bo'lasiz.</li>
                             </ul>
                         </div>
@@ -119,9 +119,8 @@
                             </div>
                         </div>
 
-                        <a
-                            href="https://kadirov.dev/course-middle"
-                            target="_blank"
+                        <router-link
+                            :to="{ name: 'courses', params: { slug: 'middle-full-stack-web-developer' } }"
                             class="text-purple text-xl font-semibold hover:bg-purple hover:text-white w-fit group px-2 py-1 rounded transition-all animation-fade-in"
                         >
                             <div class="flex gap-1 items-center">
@@ -132,18 +131,11 @@
                                     <path class="stroke-purple group-hover:stroke-white" d="M14 7L19 12" stroke="#80007F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </div>
-                        </a>
+                        </router-link>
                     </div>
                     <div class="hidden lg:grid grid-cols-2 gap-2.5 lg:gap-[30px] h-fit">
-                        <div
-                            v-for="skill of middleSkills"
-                            :key="skill.name"
-                            class="bg-white rounded-[10px] p-2.5 lg:p-5 flex items-center gap-1 lg:gap-2.5 shadow-md h-fit animation-fade-in"
-                        >
-                            <div class="size-6 lg:size-10 flex justify-center items-center">
-                                <img class="w-full flex-none " :src="skill.image" alt="html-image">
-                            </div>
-                            <p class="text-xs lg:text-2xl font-gilroy-semibold">{{ skill.name }}</p>
+                        <div v-for="skill of middleSkills" :key="skill.name">
+                            <Skill :skill/>
                         </div>
                     </div>
                 </div>
@@ -156,6 +148,7 @@
 import HeadingOne from "@/components/UI/HeadingOne.vue";
 import HeadingTwo from "@/components/UI/HeadingTwo.vue";
 import {ref} from "vue";
+import Skill from "@/components/Skill.vue";
 
 const emit = defineEmits(['onChangeTab'])
 const isJuniorActiveTab = ref(true)

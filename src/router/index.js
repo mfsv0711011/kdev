@@ -13,6 +13,14 @@ const router = createRouter({
             component: () => import('@/views/Home.vue'),
         },
         {
+            path: '/courses/:slug',
+            name: 'courses',
+            meta: {
+                layout: defineAsyncComponent(() => import('@/layouts/SecondaryLayout.vue')),
+            },
+            component: () => import('@/views/Course.vue'),
+        },
+        {
             path: '/auth',
             name: 'auth',
             meta: {
@@ -22,7 +30,10 @@ const router = createRouter({
         },
     ],
     scrollBehavior(to, from, savedPosition) {
-        if (to.hash) {
+        if (savedPosition) {
+            // Qayta yuklangan yoki orqaga tugmasi bosilgan holatda eski skroll pozitsiyasini saqlaydi
+            return savedPosition;
+        } else if (to.hash) {
             return new Promise((resolve) => {
                 setTimeout(() => {
                     const element = document.querySelector(to.hash);
@@ -34,13 +45,13 @@ const router = createRouter({
                     } else {
                         resolve({ top: 0 });
                     }
-                }, 0); // 300ms kutish (zaruratga qarab sozlash mumkin)
+                }, 100); // Zarurat bo'lsa vaqtni sozlang
             });
         } else {
+            // Agar hash yoki savedPosition mavjud bo'lmasa, yuqoriga ko'taradi
             return { top: 0 };
         }
     }
-
 })
 
 export default router

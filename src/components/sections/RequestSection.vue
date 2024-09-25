@@ -4,7 +4,7 @@
         <div class="container flex flex-col gap-5 lg:gap-[50px]">
             <div class="flex flex-col gap-2.5 lg:gap-5 animation-fade-in">
                 <h4 class="text-white text-center lg:text-start text-2xl lg:text-[35px] font-gilroy-semibold">Biz bilan bog'lanish</h4>
-<!--                <p class="text-white">{{requestForCallStore.isLoading}}, {{requestForCallStore.error}}, {{requestForCallStore.response}}</p>-->
+                <p class="text-white/70 text-lg">Qayta aloqaga chiqishimiz uchun, iltimos koʻrsatilgan barcha ma’lumotlarni kiriting.</p>
                 <div class="grid grid-cols-2 lg:flex-row gap-2.5 lg:gap-5">
                     <div class="flex flex-col gap-2.5 lg:gap-5 col-span-2 lg:col-span-1">
                         <KInput
@@ -45,7 +45,7 @@
             </div>
             <div class="text-center animation-fade-in">
                 <HeadingOne class="text-white">Kontaktimiz</HeadingOne>
-                <HeadingTwo class="text-white">Biz bilan barcha savollaringiz bilan aloqaga chiqing</HeadingTwo>
+                <HeadingTwo class="text-white">Barcha savollaringizga javob olish uchun quyidagi kontaktlarga aloqaga chiqing.</HeadingTwo>
             </div>
             <div class="flex flex-col lg:flex-row text-center justify-between text-white gap-2.5 animation-fade-in">
                 <div class="flex flex-col gap-1">

@@ -9,28 +9,28 @@
                     <router-link
                         :class="{'active': currentHash === '#main'}"
                         class="px-5 hover:opacity-70 transition-all py-2 nav text-nowrap"
-                        :to="{ hash: '#main' }"
+                        :to="{ name: 'home', hash: '#main' }"
                     >
                         Asosiy ekran
                     </router-link>
                     <router-link
                         :class="{'active': currentHash === '#courses'}"
                         class="px-5 hover:opacity-70 transition-all py-2 nav"
-                        :to="{ hash: '#courses' }"
+                        :to="{ name: 'home', hash: '#courses' }"
                     >
                         Kurslar
                     </router-link>
                     <router-link
                         :class="{'active': currentHash === '#info'}"
                         class="px-5 hover:opacity-70 transition-all py-2 nav"
-                        :to="{ hash: '#info' }"
+                        :to="{ name: 'home', hash: '#info' }"
                     >
                         Ma'lumot
                     </router-link>
                     <router-link
                         :class="{'active': currentHash === '#contact'}"
                         class="px-5 hover:opacity-70 transition-all py-2 nav"
-                        :to="{ hash: '#contact' }"
+                        :to="{ name: 'home', hash: '#contact' }"
                     >
                         Kontakt
                     </router-link>
@@ -80,7 +80,7 @@
                                     @click="isOpen = false"
                                     :class="{'active': currentHash === '#main'}"
                                     class="w-fit px-5 hover:opacity-70 transition-all py-2 nav text-nowrap"
-                                    :to="{ hash: '#main' }"
+                                    :to="{ name: 'home', hash: '#main' }"
                                 >
                                     Asosiy ekran
                                 </router-link>
@@ -88,7 +88,7 @@
                                     @click="isOpen = false"
                                     :class="{'active': currentHash === '#courses'}"
                                     class="w-fit px-5 hover:opacity-70 transition-all py-2 nav"
-                                    :to="{ hash: '#courses' }"
+                                    :to="{ name: 'home', hash: '#courses' }"
                                 >
                                     Kurslar
                                 </router-link>
@@ -96,7 +96,7 @@
                                     @click="isOpen = false"
                                     :class="{'active': currentHash === '#info'}"
                                     class="w-fit px-5 hover:opacity-70 transition-all py-2 nav"
-                                    :to="{ hash: '#info' }"
+                                    :to="{ name: 'home', hash: '#info' }"
                                 >
                                     Ma'lumot
                                 </router-link>
@@ -104,7 +104,7 @@
                                     @click="isOpen = false"
                                     :class="{'active': currentHash === '#contact'}"
                                     class="w-fit px-5 hover:opacity-70 transition-all py-2 nav"
-                                    :to="{ hash: '#contact' }"
+                                    :to="{ name: 'home', hash: '#contact' }"
                                 >
                                     Kontakt
                                 </router-link>

@@ -1,5 +1,5 @@
 <template>
-    <div class="" ref="root">
+    <div ref="root">
         <MainSection/>
         <StatisticSection/>
         <CoursesSection @onChangeTab="updateCourseTheme"/>

@@ -20,7 +20,7 @@
                 </div>
                 <div class="flex flex-col text-center gap-3 animation-fade-in">
                     <p class="text-6xl font-gilroy-semibold">25+</p>
-                    <p class="text-2xl font-gilroy-semibold text-darkGray">Programmani o’rgatish</p>
+                    <p class="text-2xl font-gilroy-semibold text-darkGray">Texnologiyalar</p>
                 </div>
             </div>
         </div>
