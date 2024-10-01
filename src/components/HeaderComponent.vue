@@ -7,28 +7,28 @@
                 </router-link>
                 <nav class="lg:flex justify-center items-center lg:gap-6 2xl:gap-20 hidden">
                     <router-link
-                        :class="{'active': currentHash === '#main'}"
+                        :class="{'active': currentHash === '#main' && $route.path === '/'}"
                         class="px-5 hover:opacity-70 transition-all py-2 nav text-nowrap"
                         :to="{ name: 'home', hash: '#main' }"
                     >
                         Asosiy ekran
                     </router-link>
                     <router-link
-                        :class="{'active': currentHash === '#courses'}"
+                        :class="{'active': currentHash === '#courses' && $route.path === '/'}"
                         class="px-5 hover:opacity-70 transition-all py-2 nav"
                         :to="{ name: 'home', hash: '#courses' }"
                     >
                         Kurslar
                     </router-link>
                     <router-link
-                        :class="{'active': currentHash === '#info'}"
+                        :class="{'active': currentHash === '#info' && $route.path === '/'}"
                         class="px-5 hover:opacity-70 transition-all py-2 nav"
                         :to="{ name: 'home', hash: '#info' }"
                     >
                         Ma'lumot
                     </router-link>
                     <router-link
-                        :class="{'active': currentHash === '#contact'}"
+                        :class="{'active': currentHash === '#contact' && $route.path === '/'}"
                         class="px-5 hover:opacity-70 transition-all py-2 nav"
                         :to="{ name: 'home', hash: '#contact' }"
                     >
@@ -78,7 +78,7 @@
                             <nav class="flex flex-col mt-[50px] gap-[30px] ">
                                 <router-link
                                     @click="isOpen = false"
-                                    :class="{'active': currentHash === '#main'}"
+                                    :class="{'active': currentHash === '#main' && $route.path === '/'}"
                                     class="w-fit px-5 hover:opacity-70 transition-all py-2 nav text-nowrap"
                                     :to="{ name: 'home', hash: '#main' }"
                                 >
@@ -86,7 +86,7 @@
                                 </router-link>
                                 <router-link
                                     @click="isOpen = false"
-                                    :class="{'active': currentHash === '#courses'}"
+                                    :class="{'active': currentHash === '#courses' && $route.path === '/'}"
                                     class="w-fit px-5 hover:opacity-70 transition-all py-2 nav"
                                     :to="{ name: 'home', hash: '#courses' }"
                                 >
@@ -94,7 +94,7 @@
                                 </router-link>
                                 <router-link
                                     @click="isOpen = false"
-                                    :class="{'active': currentHash === '#info'}"
+                                    :class="{'active': currentHash === '#info' && $route.path === '/'}"
                                     class="w-fit px-5 hover:opacity-70 transition-all py-2 nav"
                                     :to="{ name: 'home', hash: '#info' }"
                                 >
@@ -102,7 +102,7 @@
                                 </router-link>
                                 <router-link
                                     @click="isOpen = false"
-                                    :class="{'active': currentHash === '#contact'}"
+                                    :class="{'active': currentHash === '#contact' && $route.path === '/'}"
                                     class="w-fit px-5 hover:opacity-70 transition-all py-2 nav"
                                     :to="{ name: 'home', hash: '#contact' }"
                                 >

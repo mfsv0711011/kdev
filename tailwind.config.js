@@ -23,7 +23,8 @@ export default {
         gray: '#475467',
         darkGray: '#101828',
         middleGray: '#344054',
-        lightGray: '#A3B2BD'
+        lightGray: '#A3B2BD',
+        loaderGray: '#47546766',
       },
       animation:{
         'shake': 'shake 0.82s cubic-bezier(.36,.07,.19,.97) both',

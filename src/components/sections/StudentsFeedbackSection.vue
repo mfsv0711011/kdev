@@ -41,8 +41,8 @@
                         </div>
                         <div class="flex justify-end w-full items-center mt-auto gap-4">
                             <button class="hover:bg-purple active:bg-red-600 rounded-full transition-all py-1 px-2 group flex items-center gap-2 text-xl font-medium text-dark">
-                                <span class="group-hover:text-white text-dark/50">{{ comment.likesCount }}</span>
-                                <svg class="size-8 text-dark/50 group-hover:text-white" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 256">
+                                <span class="group-hover:text-white text-sm lg:text-base text-dark/50">{{ comment.likesCount }}</span>
+                                <svg class="size-6 lg:size-8 text-dark/50 group-hover:text-white" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 256">
                                     <path fill="currentColor" d="M178 42c-21 0-39.26 9.47-50 25.34C117.26 51.47 99 42 78 42a60.07 60.07 0 0 0-60 60c0 29.2 18.2 59.59 54.1 90.31a334.7 334.7 0 0 0 53.06 37a6 6 0 0 0 5.68 0a334.7 334.7 0 0 0 53.06-37C219.8 161.59 238 131.2 238 102a60.07 60.07 0 0 0-60-60m-50 175.11c-16.41-9.47-98-59.39-98-115.11a48.05 48.05 0 0 1 48-48c20.28 0 37.31 10.83 44.45 28.27a6 6 0 0 0 11.1 0C140.69 64.83 157.72 54 178 54a48.05 48.05 0 0 1 48 48c0 55.72-81.59 105.64-98 115.11"/>
                                 </svg>
 <!--                            filled heart    -->
@@ -64,9 +64,9 @@
             </div>
         </div>
         <div class="container flex-col justify-center mt-[30px] animation-fade-in">
-            <div class="flex items-center w-full justify-center gap-[30px]">
-                <button class="size-[50px]" @click="emblaApi3.scrollPrev()">
-                    <svg fill="none" height="50" viewBox="0 0 50 50" width="50" xmlns="http://www.w3.org/2000/svg">
+            <div class="flex items-center w-full justify-center lg:gap-[30px]">
+                <button class="size-[50px] flex justify-center items-center" @click="emblaApi3.scrollPrev()">
+                    <svg class="size-8 lg:size-12" fill="none" width="1em" height="1em" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
                         <path d="M10.4163 25.0013L39.583 25.0013" stroke="#591958" stroke-linecap="round"
                               stroke-linejoin="round" stroke-width="3"/>
                         <path d="M20.833 14.5853L10.4163 25.002" stroke="#591958" stroke-linecap="round"
@@ -75,8 +75,8 @@
                               stroke-linejoin="round" stroke-width="3"/>
                     </svg>
                 </button>
-                <button class="size-[50px]" @click="emblaApi3.scrollNext()">
-                    <svg fill="none" height="50" viewBox="0 0 50 50" width="50" xmlns="http://www.w3.org/2000/svg">
+                <button class="size-[50px] flex justify-center items-center" @click="emblaApi3.scrollNext()">
+                    <svg class="size-8 lg:size-12" fill="none" width="1em" height="1em" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
                         <path d="M39.5837 24.9987H10.417" stroke="#591958" stroke-linecap="round" stroke-linejoin="round"
                               stroke-width="3"/>
                         <path d="M29.167 35.4167L39.5837 25" stroke="#591958" stroke-linecap="round" stroke-linejoin="round"

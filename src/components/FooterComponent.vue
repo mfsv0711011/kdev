@@ -16,16 +16,16 @@
                     </div>
                     <nav
                         class="grid grid-cols-1 md:grid-cols-2 justify-center items-center lg:gap-y-8 lg:gap-x-28 font-gilroy-semibold font-semibold">
-                        <router-link :to="{ hash: '#main' }" class="px-5 hover:opacity-70 transition-all py-2 nav ">
+                        <router-link :to="{ name: 'home', hash: '#main' }" class="px-5 hover:opacity-70 transition-all py-2 nav ">
                             Asosiy ekran
                         </router-link>
-                        <router-link :to="{ hash: '#courses' }" class="px-5 hover:opacity-70 transition-all py-2 nav">
+                        <router-link :to="{ name: 'home', hash: '#courses' }" class="px-5 hover:opacity-70 transition-all py-2 nav">
                             Kurslar
                         </router-link>
-                        <router-link :to="{ hash: '#info' }" class="px-5 hover:opacity-70 transition-all py-2 nav">
+                        <router-link :to="{ name: 'home', hash: '#info' }" class="px-5 hover:opacity-70 transition-all py-2 nav">
                             Ma'lumot
                         </router-link>
-                        <router-link :to="{ hash: '#contact' }" class="px-5 hover:opacity-70 transition-all py-2 nav">
+                        <router-link :to="{ name: 'home', hash: '#contact' }" class="px-5 hover:opacity-70 transition-all py-2 nav">
                             Kontakt
                         </router-link>
                     </nav>
