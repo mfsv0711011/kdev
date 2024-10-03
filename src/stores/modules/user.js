@@ -4,8 +4,8 @@ import { computed, reactive } from 'vue'
 
 export const useUserStore = defineStore('userStore', () => {
     const state = reactive({
-        accessToken: localStorage.getItem('accessToken'),
-        refreshToken: localStorage.getItem('refreshToken'),
+        accessToken: false,
+        refreshToken: false,
         user: {},
     })
 
@@ -20,9 +20,6 @@ export const useUserStore = defineStore('userStore', () => {
     function clearToken() {
         localStorage.removeItem('accessToken')
         localStorage.removeItem('refreshToken')
-
-        state.accessToken = localStorage.getItem('accessToken')
-        state.refreshToken = localStorage.getItem('refreshToken')
     }
 
     const refreshToken = (data) =>
@@ -42,7 +39,7 @@ export const useUserStore = defineStore('userStore', () => {
         fetchAboutMe,
         getAccessToken: computed(() => state.accessToken),
         getRefreshToken: computed(() => state.refreshToken),
-        isAuthorized: computed(() => state.accessToken !== null),
+        isAuthorized: computed(() => state.accessToken),
         getUser: computed(() => state.user),
     }
 })

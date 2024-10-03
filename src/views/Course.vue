@@ -116,6 +116,7 @@
                             :label="course.name"
                             :sup="course.discountPercent ? course.discountPercent + '%' : ''"
                             name="course"
+                            @change="clearCheckedCourses"
                         />
                     </div>
                 </div>
@@ -180,7 +181,7 @@
                         >
                             <div v-if="selectedPayment === 'fully'" class="w-full grid grid-cols-2 gap-4 md:gap-7">
                                 <p class="text-xl lg:text-[34px] font-gilroy-medium">{{ (coursePriceWithDiscount / 100).toLocaleString('en-US').replace(/,/g, ' ') }} <sub class="font-gilroy text-sm lg:text-2xl">uzs</sub></p>
-                                <p v-if="module.getModule.courses.length && module.getModule.discountPercent" class="text-xl text-lightGray lg:text-[34px] font-gilroy-medium"><span class="line-through">{{ (module.getModule.courses[0].price / 100).toLocaleString('en-US').replace(/,/g, ' ') }}</span> <sub class="font-gilroy text-sm lg:text-2xl">uzs</sub></p>
+                                <p v-if="module.getModule.courses.length && module.getModule.discountPercent" class="text-xl text-lightGray lg:text-[34px] font-gilroy-medium"><span class="line-through">{{ (module.getModule.courses?.reduce((acc, courseItem) => acc + courseItem?.price, 0) / 100).toLocaleString('en-US').replace(/,/g, ' ') }}</span> <sub class="font-gilroy text-sm lg:text-2xl">uzs</sub></p>
                                 <p v-if="module.getModule.discountPercent" class="lg:text-xl text-green-700 col-span-2">Kursni summasini to'liq to'lov qilishda chegirma <span class="underline text-2xl">{{ module.getModule.discountPercent }}%</span></p>
                                 <div class="col-span-2">
                                     <KButton class="text-white w-1/2 font-gilroy-semibold">To’lovni amalga oshirish</KButton>
@@ -193,57 +194,111 @@
                             enter-from-class="translate-x-[200px] opacity-0"
                             leave-to-class="translate-x-[200px] opacity-0"
                         >
-                            <div v-if="selectedPayment === 'monthly'" class="w-full grid grid-cols-2 gap-4 md:gap-7">
-                                <div class="flex flex-col gap-4">
-                                    <p v-if="module.getModule.courses.length" class="text-xl lg:text-[34px] font-gilroy-medium">{{ parseInt((module.getModule.courses[0].price / 100) / 12).toLocaleString('en-US').replace(/,/g, ' ') }} <sub class="font-gilroy text-sm lg:text-2xl">uzs/oyiga</sub></p>
-                                    <p class="lg:text-xl font-medium col-span-2">12 to’lov</p>
-                                </div>
-                                <div class="flex flex-col gap-4">
-                                    <p class="lg:text-xl">Oyma-oy to'lov qilish uchun administrator bilan bog'laning.</p>
-                                    <div class="flex flex-col gap-2">
-                                        <a href="tel:+998901305020" class="flex items-center gap-2 transition-all italic group hover:text-purple lg:text-xl">
-                                            <svg class="size-6 text-dark group-hover:text-purple transition-all" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
-                                                <path fill="none" stroke="currentColor" stroke-dasharray="64" stroke-dashoffset="64" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 3c0.5 0 2.5 4.5 2.5 5c0 1 -1.5 2 -2 3c-0.5 1 0.5 2 1.5 3c0.39 0.39 2 2 3 1.5c1 -0.5 2 -2 3 -2c0.5 0 5 2 5 2.5c0 2 -1.5 3.5 -3 4c-1.5 0.5 -2.5 0.5 -4.5 0c-2 -0.5 -3.5 -1 -6 -3.5c-2.5 -2.5 -3 -4 -3.5 -6c-0.5 -2 -0.5 -3 0 -4.5c0.5 -1.5 2 -3 4 -3Z">
-                                                    <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.6s" values="64;0"/>
-                                                </path>
-                                            </svg>
-                                            +998 90 130 50 20
-                                        </a>
-                                        <a href="https://t.me/kadirovDevAdmin" class="flex items-center gap-2 transition-all italic group hover:text-purple lg:text-xl">
-                                            <svg class="size-6 text-dark group-hover:text-purple transition-all" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
-                                                <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                                                    <path stroke-dasharray="20" stroke-dashoffset="20" d="M21 5l-2.5 15M21 5l-12 8.5">
-                                                        <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.4s" values="20;0"/>
-                                                    </path>
-                                                    <path stroke-dasharray="24" stroke-dashoffset="24" d="M21 5l-19 7.5">
-                                                        <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.4s" values="24;0"/></path>
-                                                    <path stroke-dasharray="14" stroke-dashoffset="14" d="M18.5 20l-9.5 -6.5">
-                                                        <animate fill="freeze" attributeName="stroke-dashoffset" begin="0.4s" dur="0.3s" values="14;0"/></path>
-                                                    <path stroke-dasharray="10" stroke-dashoffset="10" d="M2 12.5l7 1">
-                                                        <animate fill="freeze" attributeName="stroke-dashoffset" begin="0.4s" dur="0.3s" values="10;0"/></path>
-                                                    <path stroke-dasharray="8" stroke-dashoffset="8" d="M12 16l-3 3M9 13.5l0 5.5">
-                                                        <animate fill="freeze" attributeName="stroke-dashoffset" begin="0.7s" dur="0.3s" values="8;0"/></path>
-                                                </g>
-                                            </svg>
-                                            @kadirovDevAdmin
-                                        </a>
-                                        <a href="https://www.instagram.com/kadirovdevadmin/" class="flex items-center gap-2 transition-all italic group hover:text-purple lg:text-xl">
-                                            <svg class="size-6 text-dark group-hover:text-purple transition-all" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
-                                                <circle cx="17" cy="7" r="1.5" fill="currentColor" fill-opacity="0">
-                                                    <animate fill="freeze" attributeName="fill-opacity" begin="1.3s" dur="0.15s" values="0;1"/>
-                                                </circle>
-                                                <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                                                    <path stroke-dasharray="72" stroke-dashoffset="72" d="M16 3c2.76 0 5 2.24 5 5v8c0 2.76 -2.24 5 -5 5h-8c-2.76 0 -5 -2.24 -5 -5v-8c0 -2.76 2.24 -5 5 -5h4Z">
-                                                        <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.6s" values="72;0"/>
-                                                    </path>
-                                                    <path stroke-dasharray="28" stroke-dashoffset="28" d="M12 8c2.21 0 4 1.79 4 4c0 2.21 -1.79 4 -4 4c-2.21 0 -4 -1.79 -4 -4c0 -2.21 1.79 -4 4 -4">
-                                                        <animate fill="freeze" attributeName="stroke-dashoffset" begin="0.7s" dur="0.6s" values="28;0"/>
-                                                    </path>
-                                                </g>
-                                            </svg>
-                                            @kadirovDevAdmin
-                                        </a>
+                            <div v-if="selectedPayment === 'monthly'">
+                                <div class="w-full grid grid-cols-2 gap-4 md:gap-7" v-if="module.getModule.courses.length === 1">
+                                    <div class="flex flex-col gap-4">
+                                        <p v-if="module.getModule.courses.length" class="text-xl lg:text-[34px] font-gilroy-medium">{{ parseInt((module.getModule.courses[0].price / 100) / 12).toLocaleString('en-US').replace(/,/g, ' ') }} <sub class="font-gilroy text-sm lg:text-2xl">uzs/oyiga</sub></p>
+                                        <p class="lg:text-xl font-medium col-span-2">12 to’lov</p>
                                     </div>
+                                    <div class="flex flex-col gap-4">
+                                        <p class="lg:text-xl">Oyma-oy to'lov qilish uchun administrator bilan bog'laning.</p>
+                                        <div class="flex flex-col gap-2">
+                                            <a href="tel:+998901305020" class="flex items-center gap-2 transition-all italic group hover:text-purple lg:text-xl">
+                                                <svg class="size-6 text-dark group-hover:text-purple transition-all" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+                                                    <path fill="none" stroke="currentColor" stroke-dasharray="64" stroke-dashoffset="64" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 3c0.5 0 2.5 4.5 2.5 5c0 1 -1.5 2 -2 3c-0.5 1 0.5 2 1.5 3c0.39 0.39 2 2 3 1.5c1 -0.5 2 -2 3 -2c0.5 0 5 2 5 2.5c0 2 -1.5 3.5 -3 4c-1.5 0.5 -2.5 0.5 -4.5 0c-2 -0.5 -3.5 -1 -6 -3.5c-2.5 -2.5 -3 -4 -3.5 -6c-0.5 -2 -0.5 -3 0 -4.5c0.5 -1.5 2 -3 4 -3Z">
+                                                        <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.6s" values="64;0"/>
+                                                    </path>
+                                                </svg>
+                                                +998 90 130 50 20
+                                            </a>
+                                            <a href="https://t.me/kadirovDevAdmin" class="flex items-center gap-2 transition-all italic group hover:text-purple lg:text-xl">
+                                                <svg class="size-6 text-dark group-hover:text-purple transition-all" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+                                                    <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                                                        <path stroke-dasharray="20" stroke-dashoffset="20" d="M21 5l-2.5 15M21 5l-12 8.5">
+                                                            <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.4s" values="20;0"/>
+                                                        </path>
+                                                        <path stroke-dasharray="24" stroke-dashoffset="24" d="M21 5l-19 7.5">
+                                                            <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.4s" values="24;0"/></path>
+                                                        <path stroke-dasharray="14" stroke-dashoffset="14" d="M18.5 20l-9.5 -6.5">
+                                                            <animate fill="freeze" attributeName="stroke-dashoffset" begin="0.4s" dur="0.3s" values="14;0"/></path>
+                                                        <path stroke-dasharray="10" stroke-dashoffset="10" d="M2 12.5l7 1">
+                                                            <animate fill="freeze" attributeName="stroke-dashoffset" begin="0.4s" dur="0.3s" values="10;0"/></path>
+                                                        <path stroke-dasharray="8" stroke-dashoffset="8" d="M12 16l-3 3M9 13.5l0 5.5">
+                                                            <animate fill="freeze" attributeName="stroke-dashoffset" begin="0.7s" dur="0.3s" values="8;0"/></path>
+                                                    </g>
+                                                </svg>
+                                                @kadirovDevAdmin
+                                            </a>
+                                            <a href="https://www.instagram.com/kadirovdevadmin/" class="flex items-center gap-2 transition-all italic group hover:text-purple lg:text-xl">
+                                                <svg class="size-6 text-dark group-hover:text-purple transition-all" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+                                                    <circle cx="17" cy="7" r="1.5" fill="currentColor" fill-opacity="0">
+                                                        <animate fill="freeze" attributeName="fill-opacity" begin="1.3s" dur="0.15s" values="0;1"/>
+                                                    </circle>
+                                                    <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                                                        <path stroke-dasharray="72" stroke-dashoffset="72" d="M16 3c2.76 0 5 2.24 5 5v8c0 2.76 -2.24 5 -5 5h-8c-2.76 0 -5 -2.24 -5 -5v-8c0 -2.76 2.24 -5 5 -5h4Z">
+                                                            <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.6s" values="72;0"/>
+                                                        </path>
+                                                        <path stroke-dasharray="28" stroke-dashoffset="28" d="M12 8c2.21 0 4 1.79 4 4c0 2.21 -1.79 4 -4 4c-2.21 0 -4 -1.79 -4 -4c0 -2.21 1.79 -4 4 -4">
+                                                            <animate fill="freeze" attributeName="stroke-dashoffset" begin="0.7s" dur="0.6s" values="28;0"/>
+                                                        </path>
+                                                    </g>
+                                                </svg>
+                                                @kadirovDevAdmin
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+<!--                                <div v-else class="p-5 bg-white shadow-md rounded mb-2 flex flex-col gap-4">-->
+<!--                                    <label-->
+<!--                                        v-for="(course, index) of module.getModule.courses"-->
+<!--                                        :key="course.id"-->
+<!--                                        class="flex relative w-full justify-between items-start group hover:bg-gray/20 transition-all rounded border border-lightGray/30 has-[:checked]:bg-blue has-[:checked]:text-white p-4 cursor-pointer has-[:disabled]:bg-loaderGray/15 has-[:disabled]:opacity-50"-->
+<!--                                        :class="{'text-red-500': !course.isActive}"-->
+<!--                                    >-->
+<!--                                        <div class="flex items-center gap-4">-->
+<!--                                            <input :disabled="!course.isActive" type="checkbox" class="invisible absolute">-->
+<!--                                            <p class="text-xl">{{ index + 1 }} - oy</p>-->
+<!--                                        </div>-->
+<!--                                        <div>-->
+<!--                                            <div class="border-b border-lightGray/40 w-52">Boshlanish oyi: {{ course.startMonth.name }}</div>-->
+<!--                                            <div class="border-b border-lightGray/40 w-52">Narxi: {{ course.price }}</div>-->
+<!--                                            <div class="border-b border-lightGray/40 w-52"><span class="text-[#0d6efd] group-has-[:checked]:text-purple">{{ course.countOfStudents }}</span> ta joydan <span class="text-red-500 group-has-[:checked]:text-dark">{{ showFreePlace(course.countOfStudents, course.members) }}</span> ta qoldi.</div>-->
+<!--                                        </div>-->
+<!--                                    </label>-->
+<!--                                </div>-->
+                                <div v-else class="p-5 bg-white shadow-md rounded mb-2 flex flex-col gap-4">
+                                    <label
+                                        v-for="(course, index) of module.getModule.courses"
+                                        :key="course.id"
+                                        class="flex relative w-full justify-between items-start group transition-all rounded border border-lightGray/30 p-4 cursor-pointer"
+                                        :class="{
+                                            'bg-blue text-white': isChecked(index, course.isActive),
+                                            'bg-gray/20': isHovered(index),
+                                            'opacity-50': !course.isActive,
+                                            'text-red-500': !course.isActive
+                                        }"
+                                        @mouseenter="hoverIndex = index"
+                                        @mouseleave="hoverIndex = null"
+                                        @mousedown="toggleChecked(index)"
+                                    >
+                                        <div class="flex items-center gap-4">
+                                            <input :disabled="!course.isActive" type="checkbox" class="invisible absolute" :checked="isChecked(index, course.isActive)" >
+                                            <p class="text-xl">{{ index + 1 }} - oy</p>
+                                        </div>
+                                        <div>
+                                            <div class="border-b border-lightGray/40 w-52">Boshlanish oyi: {{ course.startMonth.name }}</div>
+                                            <div class="border-b border-lightGray/40 w-52">Narxi: {{ course.price }}</div>
+                                            <div class="border-b border-lightGray/40 w-52">
+                                                <div v-if="showFreePlace(course.countOfStudents, course.members) < 0">Ushbu kursda joy qolmadi.</div>
+                                                <div v-else>
+                                                    <span class="text-[#0d6efd]" :class="{'text-purple': isChecked(index, course.isActive)}">{{ course.countOfStudents }}</span>
+                                                    ta joydan
+                                                    <span class="text-red-500" :class="{'text-dark': isChecked(index, course.isActive)}">{{ showFreePlace(course.countOfStudents, course.members) }}</span>
+                                                    ta qoldi.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </label>
                                 </div>
                             </div>
                         </transition>
@@ -289,7 +344,7 @@ const middleCourse = {
 }
 
 const course = computed(() => isJuniorRoute ? juniorCourse : middleCourse)
-const coursePriceWithDiscount = computed(() => (module.getModule.courses[0]?.price - (module.getModule.courses[0]?.price * (module.getModule.discountPercent / 100))) || module.getModule.courses[0]?.price)
+const coursePriceWithDiscount = computed(() => (module.getModule.courses?.reduce((acc, courseItem) => acc + courseItem?.price, 0) - (module.getModule.courses.reduce((acc, courseItem) => acc + courseItem?.price, 0) * (module.getModule.discountPercent / 100))) || module.getModule.courses.reduce((acc, courseItem) => acc + courseItem?.price, 0))
 const moduleTeacherFullName = computed(() => module.getModule?.courses[0]?.teacher?.givenName + ' ' + module.getModule?.courses[0]?.teacher?.familyName)
 
 const selectedCourseId = ref()
@@ -299,11 +354,57 @@ watch(selectedCourseId, () => {
     module.fetchModule(selectedCourseId.value)
 })
 
+const showFreePlace = (countOfStudents, members) => {
+    if (members <= 0) return countOfStudents;
+
+    const freePlace = countOfStudents - members;
+
+    if (freePlace > 10) {
+        const secondDigit = freePlace % 10;
+        return secondDigit > 5 ? secondDigit - 5 : secondDigit;
+    }
+
+    return freePlace;
+};
 
 onMounted(async () => {
     await module.fetchModules({ isArchive: false, courseType: isJuniorRoute ? 'web-junior' : 'web-middle' })
     selectedCourseId.value = module.getModules.models[0]?.id
 })
+
+
+const hoverIndex = ref(null);
+const checkedCourses = ref([]);
+
+const clearCheckedCourses = () => {
+    checkedCourses.value = []
+}
+
+const isHovered = index => {
+    if (hoverIndex.value === null || checkedCourses.value.includes(index)) return false;
+
+    for (let i = 0; i <= hoverIndex.value; i++) {
+        if (i === index && module.getModule.courses[i].isActive) {
+            return true;
+        }
+    }
+    return false;
+};
+
+const isChecked = (index, isActive) => isActive ? checkedCourses.value.includes(index) : false
+
+const toggleChecked = (index) => {
+    if (checkedCourses.value.includes(index)) {
+        checkedCourses.value = checkedCourses.value.filter(i => i !== index && i < index);
+    } else {
+        for (let i = 0; i <= index; i++) {
+            if (module.getModule.courses[i].isActive && !checkedCourses.value.includes(i)) {
+                checkedCourses.value.push(i);
+            }
+        }
+    }
+};
+
 </script>
 
 <style scoped>
