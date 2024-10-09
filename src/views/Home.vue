@@ -28,7 +28,6 @@ import StudentsFeedbackSection from "@/components/sections/StudentsFeedbackSecti
 import RequestSection from "@/components/sections/RequestSection.vue";
 import { onMounted, reactive, ref } from "vue";
 import { useCommentStore } from "@/stores/modules/comment.js";
-import {useUserStore} from "@/stores/modules/user.js";
 
 const filters = reactive({
     page: 1,
@@ -36,7 +35,6 @@ const filters = reactive({
 })
 const root = ref(null)
 const isJuniorCourseTheme = ref(true)
-const userStore = useUserStore()
 
 const updateCourseTheme = val => {
     isJuniorCourseTheme.value = val
