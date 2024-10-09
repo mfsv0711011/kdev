@@ -32,7 +32,7 @@
                             'bg-[#cccccc] text-[#666666]': requestForCallStore.isLoading,
                             'text-dark bg-white': !requestForCallStore.isLoading
                         }"
-                        class="animation-fade-in h-fit mt-auto col-span-2 w-full lg:w-fit ml-auto rounded text-xl lg:text-2xl font-gilroy-medium flex justify-center items-center px-[100px] py-4 lg:py-5"
+                        class="animation-fade-in h-fit mt-auto col-span-2 w-full lg:w-fit ml-auto rounded text-xl lg:text-2xl font-gilroy-medium flex justify-center items-center px-[100px] py-4 lg:py-5 outline-purple"
                     >
                         <div v-if="requestForCallStore.isLoading" class="h-7 w-[94px] flex justify-center items-center">
                             <svg class="animate-spin size-5 lg:size-6 text-purple" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">

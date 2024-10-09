@@ -26,84 +26,8 @@
                 </div>
             </div>
         </div>
-        <div class="bg-dark">
-            <div class="container py-7 selection:text-dark selection:bg-white">
-                <div v-if="isJuniorRoute" class="flex text-white flex-col lg:py-10 lg:text-2xl font-medium gap-2.5 lg:gap-5 animation-fade-in font-gilroy-semibold">
-                    <div>
-                        <h4 class="text-xl lg:text-[30px] font-gilroy-semibold animation-fade-in">Kursda qatnashish uchun nimalar kerak bo’ladi?</h4>
-                        <ul class="list-disc ml-6 flex flex-col gap-3 lg:pt-2">
-                            <li class="animation-fade-in"><i class="font-semibold">Kompyuter, yoki noutbuk</i></li>
-                            <li class="animation-fade-in"> Darslar<i class="font-semibold"> Zoom, Discord </i> va <i class="font-semibold">Telemost</i> dasturlarining biri orqali onlayn tarzda o'tiladi. Siz o’qituvchi va uning elektron doskasini ko’rib turasiz. Ushbu dasturlarni bu yerdan yuklab olishingiz mumkin: <br><KLink href="https://zoom.us/download" target="_blank">Zoom</KLink>, <KLink href="https://discord.com/download" target="_blank">Discord</KLink>, <KLink href="https://play.google.com/store/apps/details?id=ru.yandex.telemost&amp;hl=ru&amp;gl=US" target="_blank"> Telemost </KLink> <br></li>
-                            <li class="animation-fade-in"><i class="font-semibold">Internet tezligi</i> video a’loqa qilish uchun yetarli bo’lishi kerak. Tekshirish uchun fast.com saytiga kiring. Tezligingiz yetarli darajada bo’lishi uchun sayt kamida 2 mega bit tezlik ko’rsatishi kerak. </li>
-                            <li class="animation-fade-in">O’qituvchi ba boshqa o’quvchilar bilan suhbat qilish uchun <i class="font-semibold">mikrofoni bor naushnik</i> kerak bo’ladi. Telefon naushniklari ham to’g’ri keladi. </li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="text-xl lg:text-[30px] font-gilroy-semibold animation-fade-in">Kurs vaqti</h4>
-                        <ul class="list-disc ml-6 flex flex-col gap-3 lg:pt-2">
-                            <li class="animation-fade-in"><i class="font-semibold">Haftasiga 2 kun</i></li>
-                            <li class="animation-fade-in"><i class="font-semibold"> Davomiyligi 2 soat </i>(Dars davomiyiligi, rejaga qarab, ikki soatdan oshishi yoki kamayishi mumkin). Toshkent vaqti bilan soat 20:00 dan 22:00 gacha. Yaxshi dasturchi bo’lish uchun dars bo’lmagan kunlar ham kamida 2 soatdan vaqt ajratish maslahat beriladi.</li>
-                            <li class="animation-fade-in"><i class="font-semibold">Dars videoga yozib boriladi. </i>Agar biror sababga ko’ra darsda qatnasha olmasangiz, video sizga yuboriladi. Lekin, ko’p darsga qatnasha olmasangiz, siz bilan xayrlashishga to’g’ri kelishi mumkin. Chunki faqat video orqali o’rgansangiz – bu kurs siz uchun oddiy video-darslik bo’lib qoladi. Biz esa bunga qarshimiz.</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="text-xl lg:text-[30px] font-gilroy-semibold animation-fade-in">Kurs haqida</h4>
-                        <ul class="list-disc ml-6 flex flex-col gap-3 lg:pt-2">
-                            <li class="animation-fade-in"><i class="font-semibold">Kurs davomiyligi: </i>5 oy</li>
-                            <li class="animation-fade-in"><i class="font-semibold">To’lov turlari: </i>O'zbekistonlik o'quvchilar uzcard yoki Humo kartalari orqali saytimizdan to'lov qilishlari mumkin. Chet eldagi vatandoshlar mastercard yoki visa kartalariga pul o’tkazish orqali to’lovni amalga oshirishlari mumkin bo'ladi.</li>
-                            <li class="animation-fade-in"><i class="font-semibold">Kurs tili: </i>O’zbekcha</li>
-                            <li v-if="module.getModule.courses" class="animation-fade-in"><i class="font-semibold">O’qituvchi: </i>{{ moduleTeacherFullName }}</li>
-                            <li class="animation-fade-in"><i class="font-semibold">Kursga yozilish uchun: </i>100% oldindan, yoki har oy bo'lib to'lashingiz mumkin.</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="text-xl lg:text-[30px] font-gilroy-semibold animation-fade-in">Kursdan maqsad</h4>
-                        <ul class="list-disc ml-6 flex flex-col gap-3 lg:pt-2">
-                            <li class="animation-fade-in">5 oy mobaynida sizga 10 dan ortiq texnologiyalarni o’rgatish. Sizni mustaqil ishlay oladigan professional dasturchiga aylantirish.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div v-if="!isJuniorRoute" class="flex text-white flex-col lg:py-10 lg:text-2xl font-medium gap-2.5 lg:gap-5 animation-fade-in font-gilroy-semibold">
-                    <div>
-                        <h4 class="text-xl lg:text-[30px] font-gilroy-semibold animation-fade-in">Kursda qatnashish uchun nimalar kerak bo’ladi?</h4>
-                        <ul class="list-disc ml-6 flex flex-col gap-3 lg:pt-2">
-                            <li class="animation-fade-in"><i class="font-semibold">"Junior Full Stack Web Developer"</i> kursini tugatgan bo'lishingiz kerak.</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="text-xl lg:text-[30px] font-gilroy-semibold animation-fade-in">Kurs vaqti</h4>
-                        <ul class="list-disc ml-6 flex flex-col gap-3 lg:pt-2">
-                            <li class="animation-fade-in"><i class="font-semibold">Haftasiga 2 kun</i></li>
-                            <li class="animation-fade-in"><i class="font-semibold"> Davomiyligi 2 soat </i>(Dars davomiyiligi, rejaga qarab, ikki soatdan oshishi yoki kamayishi mumkin). Toshkent vaqti bilan soat 20:00 dan 22:00 gacha. Yaxshi dasturchi bo’lish uchun dars bo’lmagan kunlar ham kamida 2 soatdan vaqt ajratish maslahat beriladi.</li>
-                            <li class="animation-fade-in"><i class="font-semibold">Dars videoga yozib boriladi. </i>Agar biror sababga ko’ra darsda qatnasha olmasangiz, video sizga yuboriladi. Lekin, ko’p darsga qatnasha olmasangiz, siz bilan xayrlashishga to’g’ri kelishi mumkin. Chunki faqat video orqali o’rgansangiz – bu kurs siz uchun oddiy video-darslik bo’lib qoladi. Biz esa bunga qarshimiz.</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="text-xl lg:text-[30px] font-gilroy-semibold animation-fade-in">Kurs haqida</h4>
-                        <ul class="list-disc ml-6 flex flex-col gap-3 lg:pt-2">
-                            <li class="animation-fade-in"><i class="font-semibold">Kurs davomiyligi: </i>5 oy</li>
-                            <li class="animation-fade-in"><i class="font-semibold">To’lov turlari: </i>O'zbekistonlik o'quvchilar uzcard yoki Humo kartalari orqali saytimizdan to'lov qilishlari mumkin. Chet eldagi vatandoshlar mastercard yoki visa kartalariga pul o’tkazish orqali to’lovni amalga oshirishlari mumkin bo'ladi.</li>
-                            <li class="animation-fade-in"><i class="font-semibold">Kurs tili: </i>O’zbekcha</li>
-                            <li class="animation-fade-in"><i class="font-semibold">O’qituvchi: </i>Akmal Kadirov</li>
-                            <li class="animation-fade-in"><i class="font-semibold">Kursga yozilish uchun: </i>100% oldindan, yoki har oy bo'lib to'lashingiz mumkin.</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="text-xl lg:text-[30px] font-gilroy-semibold animation-fade-in">Kursdan maqsad</h4>
-                        <ul class="list-disc ml-6 flex flex-col gap-3 lg:pt-2">
-                            <li class="animation-fade-in">5 oy mobaynida bilimlaringizni oshirib, sizni tajribali Middle dasturchi darajasiga olib chiqish.</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="text-xl lg:text-[30px] font-gilroy-semibold animation-fade-in">Kursni tugatgach</h4>
-                        <ul class="list-disc ml-6 flex flex-col gap-3 lg:pt-2">
-                            <li class="animation-fade-in">Bizning kompanyamizda 2 oylik amaliyot (практика) o'taysiz. Bunda siz, kurs davomida olgan bilimlaringizni haqiqiy loyihalarda sinash imkoniga ega bo'lasiz.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="bg-white py-7">
+        <CourseRequirementInfoComponent v-if="module.getModules.models.length" :is-junior-route :teacher-full-name="moduleTeacherFullName"/>
+        <div v-if="module.getModules.models.length" class="bg-white py-7">
             <div class="container flex flex-col gap-4 lg:gap-7">
                 <CoursesRadioButtonLoader v-if="module.isCoursesLoading"/>
                 <div v-if="!module.isCoursesLoading" class="flex flex-col gap-2.5 md:gap-7 md:mt-6">
@@ -120,17 +44,9 @@
                         />
                     </div>
                 </div>
-<!--                <transition-->
-<!--                    enter-active-class="transition-all duration-400 ease-out"-->
-<!--                    leave-active-class="transition-all duration-100 ease-in"-->
-<!--                    enter-from-class="-translate-x-[200px] opacity-0"-->
-<!--                    leave-to-class="-translate-x-[200px] opacity-0"-->
-<!--                >-->
-<!--                    <DiscountBanner v-if="selectedCourseId" :discount-percent="module.getModule.discountPercent" remains-time="2 : 00 : 48 : 30"/>-->
-<!--                </transition>-->
             </div>
         </div>
-        <div class="container py-7">
+        <div v-if="module.getModules.models.length" class="container py-7">
             <PaymentLoader v-if="module.isCoursesLoading || module.isCourseLoading"/>
             <div v-if="!module.isCourseLoading" class="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-8">
                 <div>
@@ -166,7 +82,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="overflow-hidden">
+                <div class="flex flex-col">
                     <p class="text-sm lg:text-xl font-medium mb-1">To’lov turi</p>
                     <div class="flex flex-col gap-4 lg:gap-8">
                         <div class="w-full grid grid-cols-2 gap-4 md:gap-7 m-0.5">
@@ -183,9 +99,6 @@
                                 <p class="text-xl lg:text-[34px] font-gilroy-medium">{{ (coursePriceWithDiscount / 100).toLocaleString('en-US').replace(/,/g, ' ') }} <sub class="font-gilroy text-sm lg:text-2xl">uzs</sub></p>
                                 <p v-if="module.getModule.courses.length && module.getModule.discountPercent" class="text-xl text-lightGray lg:text-[34px] font-gilroy-medium"><span class="line-through">{{ (module.getModule.courses?.reduce((acc, courseItem) => acc + courseItem?.price, 0) / 100).toLocaleString('en-US').replace(/,/g, ' ') }}</span> <sub class="font-gilroy text-sm lg:text-2xl">uzs</sub></p>
                                 <p v-if="module.getModule.discountPercent" class="lg:text-xl text-green-700 col-span-2">Kursni summasini to'liq to'lov qilishda chegirma <span class="underline text-2xl">{{ module.getModule.discountPercent }}%</span></p>
-                                <div class="col-span-2">
-                                    <KButton class="text-white w-1/2 font-gilroy-semibold">To’lovni amalga oshirish</KButton>
-                                </div>
                             </div>
                         </transition>
                         <transition
@@ -248,34 +161,16 @@
                                         </div>
                                     </div>
                                 </div>
-<!--                                <div v-else class="p-5 bg-white shadow-md rounded mb-2 flex flex-col gap-4">-->
-<!--                                    <label-->
-<!--                                        v-for="(course, index) of module.getModule.courses"-->
-<!--                                        :key="course.id"-->
-<!--                                        class="flex relative w-full justify-between items-start group hover:bg-gray/20 transition-all rounded border border-lightGray/30 has-[:checked]:bg-blue has-[:checked]:text-white p-4 cursor-pointer has-[:disabled]:bg-loaderGray/15 has-[:disabled]:opacity-50"-->
-<!--                                        :class="{'text-red-500': !course.isActive}"-->
-<!--                                    >-->
-<!--                                        <div class="flex items-center gap-4">-->
-<!--                                            <input :disabled="!course.isActive" type="checkbox" class="invisible absolute">-->
-<!--                                            <p class="text-xl">{{ index + 1 }} - oy</p>-->
-<!--                                        </div>-->
-<!--                                        <div>-->
-<!--                                            <div class="border-b border-lightGray/40 w-52">Boshlanish oyi: {{ course.startMonth.name }}</div>-->
-<!--                                            <div class="border-b border-lightGray/40 w-52">Narxi: {{ course.price }}</div>-->
-<!--                                            <div class="border-b border-lightGray/40 w-52"><span class="text-[#0d6efd] group-has-[:checked]:text-purple">{{ course.countOfStudents }}</span> ta joydan <span class="text-red-500 group-has-[:checked]:text-dark">{{ showFreePlace(course.countOfStudents, course.members) }}</span> ta qoldi.</div>-->
-<!--                                        </div>-->
-<!--                                    </label>-->
-<!--                                </div>-->
-                                <div v-else class="p-5 bg-white shadow-md rounded mb-2 flex flex-col gap-4">
+                                <div v-else class="p-5 bg-white shadow-md rounded flex flex-col gap-4">
                                     <label
                                         v-for="(course, index) of module.getModule.courses"
                                         :key="course.id"
-                                        class="flex relative w-full justify-between items-start group transition-all rounded border border-lightGray/30 p-4 cursor-pointer"
+                                        class="flex relative w-full justify-between items-start group transition-all rounded border border-lightGray/30 p-2.5 lg:p-4 cursor-pointer"
                                         :class="{
-                                            'bg-blue text-white': isChecked(index, course.isActive),
+                                            'bg-purple text-white': isChecked(index, course.isActive),
                                             'bg-gray/20': isHovered(index),
                                             'opacity-50': !course.isActive,
-                                            'text-red-500': !course.isActive
+                                            'text-red-500 bg-lightGray/20': !course.isActive
                                         }"
                                         @mouseenter="hoverIndex = index"
                                         @mouseleave="hoverIndex = null"
@@ -283,7 +178,7 @@
                                     >
                                         <div class="flex items-center gap-4">
                                             <input :disabled="!course.isActive" type="checkbox" class="invisible absolute" :checked="isChecked(index, course.isActive)" >
-                                            <p class="text-xl">{{ index + 1 }} - oy</p>
+                                            <p class="lg:text-xl">{{ index + 1 }} - oy</p>
                                         </div>
                                         <div>
                                             <div class="border-b border-lightGray/40 w-52">Boshlanish oyi: {{ course.startMonth.name }}</div>
@@ -291,17 +186,26 @@
                                             <div class="border-b border-lightGray/40 w-52">
                                                 <div v-if="showFreePlace(course.countOfStudents, course.members) < 0">Ushbu kursda joy qolmadi.</div>
                                                 <div v-else>
-                                                    <span class="text-[#0d6efd]" :class="{'text-purple': isChecked(index, course.isActive)}">{{ course.countOfStudents }}</span>
+                                                    <span class="text-[#0d6efd] font-gilroy-bold" :class="{'text-blue': isChecked(index, course.isActive)}">{{ course.countOfStudents }}</span>
                                                     ta joydan
-                                                    <span class="text-red-500" :class="{'text-dark': isChecked(index, course.isActive)}">{{ showFreePlace(course.countOfStudents, course.members) }}</span>
+                                                    <span class="font-gilroy-bold" :class="{'text-black': showFreePlace(course.countOfStudents, course.members) > 5, 'text-red-500': showFreePlace(course.countOfStudents, course.members) <= 5, }">{{ showFreePlace(course.countOfStudents, course.members) }}</span>
                                                     ta qoldi.
                                                 </div>
                                             </div>
                                         </div>
                                     </label>
+
+                                    <div v-if="totalSumCheckedCourses" class="w-full flex items-center gap-2 ">
+                                        <p class="lg:text-xl">Jami: </p>
+                                        <p class="text-xl lg:text-2xl font-gilroy-medium">{{ (totalSumCheckedCourses / 100).toLocaleString('en-US').replace(/,/g, ' ') }} <sub class="font-gilroy text-sm lg:text-base">uzs</sub></p>
+                                    </div>
                                 </div>
                             </div>
                         </transition>
+                    </div>
+                    <div class="w-full flex gap-5 flex-col mt-4 lg:mt-7 justify-center">
+                        <KButton v-if="userStore.isAuthorized" class="text-white w-full lg:w-1/2 font-gilroy-semibold">To’lovni amalga oshirish</KButton>
+                        <p v-if="isVisibleMessageOfAuthorizing && !userStore.isAuthorized" class="lg:text-xl">Kursga yozilish uchun avval <router-link :to="{ name: 'sign-in' }" class="text-purple font-gilroy-semibold">tizimga kiring</router-link> yoki <router-link :to="{ name: 'sign-up' }" class="text-purple font-gilroy-semibold">ro'yxatdan o'ting</router-link>.</p>
                     </div>
                 </div>
             </div>
@@ -318,14 +222,15 @@ import {computed, onMounted, ref, watch} from "vue";
 import KRadioButton from "@/components/UI/KRadioButton.vue";
 import HeadingFive from "@/components/UI/HeadingFive.vue";
 import {useRoute} from "vue-router";
-import KLink from "@/components/UI/KLink.vue";
 import {useModule} from "@/stores/modules/temp/module.js";
 import PaymentLoader from "@/components/loaders/PaymentLoader.vue";
 import CoursesRadioButtonLoader from "@/components/loaders/CoursesRadioButtonLoader.vue";
 import KButton from "@/components/UI/KButton.vue";
-// import DiscountBanner from "@/components/DiscountBanner.vue";
+import {useUserStore} from "@/stores/modules/user.js";
+import CourseRequirementInfoComponent from "@/components/CourseRequirementInfoComponent.vue";
 
 const module = useModule()
+const userStore = useUserStore()
 const route = useRoute()
 const isJuniorRoute = route.params.slug === 'junior-full-stack-web-developer'
 
@@ -346,6 +251,7 @@ const middleCourse = {
 const course = computed(() => isJuniorRoute ? juniorCourse : middleCourse)
 const coursePriceWithDiscount = computed(() => (module.getModule.courses?.reduce((acc, courseItem) => acc + courseItem?.price, 0) - (module.getModule.courses.reduce((acc, courseItem) => acc + courseItem?.price, 0) * (module.getModule.discountPercent / 100))) || module.getModule.courses.reduce((acc, courseItem) => acc + courseItem?.price, 0))
 const moduleTeacherFullName = computed(() => module.getModule?.courses[0]?.teacher?.givenName + ' ' + module.getModule?.courses[0]?.teacher?.familyName)
+const isVisibleMessageOfAuthorizing = computed(() => (module.getModule.courses.length === 1 && selectedPayment.value === 'fully') || module.getModule.courses.length > 1)
 
 const selectedCourseId = ref()
 const selectedPayment = ref('fully')
@@ -375,6 +281,8 @@ onMounted(async () => {
 
 const hoverIndex = ref(null);
 const checkedCourses = ref([]);
+const allPricesCheckedCourses = computed(() => checkedCourses.value.map(checkedCourse => module.getModule.courses[checkedCourse].price));
+const totalSumCheckedCourses = computed(() => allPricesCheckedCourses.value.length ? allPricesCheckedCourses.value.reduce((a, b) => a + b) : 0);
 
 const clearCheckedCourses = () => {
     checkedCourses.value = []

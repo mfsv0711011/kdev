@@ -17,15 +17,15 @@ export default {
         'gilroy-bold': 'Gilroy-bold',
       },
       colors: {
-        authBgGray: '#EEF2F5',
+        authBgGray: '#eef2f5',
         dark: '#222222',
-        purple: '#7F56D9',
+        purple: '#7f56d9',
         gray: '#475467',
         darkGray: '#101828',
         middleGray: '#344054',
-        lightGray: '#A3B2BD',
+        lightGray: '#a3b2bd',
         loaderGray: '#47546766',
-        blue: '#3EA2FF'
+        blue: '#3ea2ff'
       },
       animation:{
         'shake': 'shake 0.82s cubic-bezier(.36,.07,.19,.97) both',

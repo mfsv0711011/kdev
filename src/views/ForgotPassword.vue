@@ -1,5 +1,5 @@
 <template>
-    <router-view/>
+    <p>Forgot password</p>
 </template>
 
 <script setup>

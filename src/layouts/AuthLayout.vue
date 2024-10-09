@@ -1,6 +1,6 @@
 <template>
-    <div class="bg-authBgGray min-h-dvh">
-        <h1>Auth</h1>
+    <div class="bg-authBgGray min-h-dvh overflow-y-auto">
+        <router-view/>
     </div>
 </template>
 

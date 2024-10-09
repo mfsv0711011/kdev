@@ -9,14 +9,14 @@
                 <button
                     @click="updateActiveTab(true)"
                     :class="{'shadow bg-white': isJuniorActiveTab}"
-                    class="flex gap-1 justify-center rounded-md md:rounded-2xl transition-all text-sm lg:text-[30px] font-gilroy-semibold py-2.5 px-2 sm:py-4 lg:py-8 w-full"
+                    class="flex gap-1 justify-center rounded-md md:rounded-2xl transition-all text-sm lg:text-[30px] font-gilroy-semibold py-2.5 px-2 sm:py-4 lg:py-8 w-full outline-gray"
                 >
                     Junior Full Stack <span class="hidden sm:block font-gilroy-semibold"> Developer</span>
                 </button>
                 <button
                     @click="updateActiveTab(false)"
                     :class="{'shadow bg-white': !isJuniorActiveTab}"
-                    class="flex gap-1 justify-center rounded-md md:rounded-2xl transition-all text-sm lg:text-[30px] font-gilroy-semibold py-2.5 px-2 sm:py-4 lg:py-8 w-full"
+                    class="flex gap-1 justify-center rounded-md md:rounded-2xl transition-all text-sm lg:text-[30px] font-gilroy-semibold py-2.5 px-2 sm:py-4 lg:py-8 w-full outline-gray"
                 >
                     Middle Full Stack <span class="hidden sm:block font-gilroy-semibold"> Developer</span>
                 </button>
@@ -33,7 +33,7 @@
                             <h4 class="text-xl lg:text-[30px] font-gilroy-semibold animation-fade-in">Kursda qatnashish uchun nimalar kerak bo’ladi?</h4>
                             <ul class="list-disc ml-6 flex flex-col gap-1 pt-2">
                                 <li class="animation-fade-in"><b>Kompyuter, yoki noutbuk</b></li>
-                                <li class="animation-fade-in"> Darslar<b> Zoom, Discord </b> va <b>Telemost</b> dasturlarining biri orqali onlayn tarzda o'tiladi. Siz o’qituvchi va uning elektron doskasini ko’rib turasiz. Ushbu dasturlarni bu yerdan yuklab olishingiz mumkin: <br><a href="https://zoom.us/download" target="_blank">Zoom</a>, <a href="https://discord.com/download" target="_blank">Discord</a>, <a href="https://play.google.com/store/apps/details?id=ru.yandex.telemost&amp;hl=ru&amp;gl=US" target="_blank"> Telemost </a> <br></li>
+                                <li class="animation-fade-in"> Darslar<b> Zoom, Discord </b> va <b>Telemost</b> dasturlarining biri orqali onlayn tarzda o'tiladi. Siz o’qituvchi va uning elektron doskasini ko’rib turasiz. Ushbu dasturlarni bu yerdan yuklab olishingiz mumkin: <br><a class="outline-gray" href="https://zoom.us/download" target="_blank">Zoom</a>, <a class="outline-gray" href="https://discord.com/download" target="_blank">Discord</a>, <a class="outline-gray" href="https://play.google.com/store/apps/details?id=ru.yandex.telemost&amp;hl=ru&amp;gl=US" target="_blank"> Telemost </a> <br></li>
                                 <li class="animation-fade-in"><b>Internet tezligi</b> video a’loqa qilish uchun yetarli bo’lishi kerak. Tekshirish uchun fast.com saytiga kiring. Tezligingiz yetarli darajada bo’lishi uchun sayt kamida 2 mega bit tezlik ko’rsatishi kerak. </li>
                                 <li class="animation-fade-in">O’qituvchi ba boshqa o’quvchilar bilan suhbat qilish uchun <b>mikrofoni bor naushnik</b> kerak bo’ladi. Telefon naushniklari ham to’g’ri keladi. </li>
                             </ul>
@@ -60,11 +60,11 @@
 
                         <router-link
                             :to="{ name: 'courses', params: { slug: 'junior-full-stack-web-developer' } }"
-                            class="text-purple text-xl font-semibold hover:bg-purple hover:text-white w-fit group px-2 py-1 rounded transition-all animation-fade-in"
+                            class="text-purple text-xl font-semibold hover:bg-purple hover:text-white w-fit group px-2 py-1 rounded transition-all animation-fade-in outline-gray"
                         >
                             <div class="flex gap-1 items-center">
-                                <span>Batafsil</span>
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <p class="text-sm lg:text-xl mt-0.5">Batafsil</p>
+                                <svg class="text-lg lg:text-2xl" width="1em" height="1em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path class="stroke-purple group-hover:stroke-white" d="M19 12H5" stroke="#80007F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                     <path class="stroke-purple group-hover:stroke-white" d="M14 17L19 12" stroke="#80007F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                     <path class="stroke-purple group-hover:stroke-white" d="M14 7L19 12" stroke="#80007F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

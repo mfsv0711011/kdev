@@ -4,36 +4,42 @@
             <div class="container">
                 <div class="flex items-center justify-between py-12 border-b border-[#DFDFDF]">
                     <div class="flex flex-col gap-5 justify-start">
-                        <router-link :to="{ name: 'home' }">
+                        <router-link :to="{ name: 'home' }" class="outline-gray">
                             <img alt="logo" class="h-10 lg:h-16" src="/logo-full.svg">
                         </router-link>
                         <div class="flex justify-start items-start gap-5 xl:gap-10 font-semibold flex-col md:hidden">
-                            <router-link to="/">
-                                <KButton class="px-4">Tekin kurslar</KButton>
+                            <KAnchorButton class="text-nowrap" target="_blank" href="https://myblog.uz/author/kadirov/">Tekin kurslar</KAnchorButton>
+                            <router-link v-if="!userStore.isAuthorized" :to="{ name: 'sign-in' }" class="hover:opacity-70 transition-all outline-gray">
+                                Kirish
                             </router-link>
-                            <router-link class="hover:opacity-70 transition-all px-5" to="/">Akkaunt</router-link>
+                            <button v-if="userStore.isAuthorized" @click="userStore.clearToken" class="hover:opacity-70 transition-all outline-gray">
+                                Chiqish
+                            </button>
                         </div>
                     </div>
                     <nav
                         class="grid grid-cols-1 md:grid-cols-2 justify-center items-center lg:gap-y-8 lg:gap-x-28 font-gilroy-semibold font-semibold">
-                        <router-link :to="{ name: 'home', hash: '#main' }" class="px-5 hover:opacity-70 transition-all py-2 nav ">
+                        <router-link :to="{ name: 'home', hash: '#main' }" class="px-5 hover:opacity-70 transition-all py-2 nav outline-gray">
                             Asosiy ekran
                         </router-link>
-                        <router-link :to="{ name: 'home', hash: '#courses' }" class="px-5 hover:opacity-70 transition-all py-2 nav">
+                        <router-link :to="{ name: 'home', hash: '#courses' }" class="px-5 hover:opacity-70 transition-all py-2 nav outline-gray">
                             Kurslar
                         </router-link>
-                        <router-link :to="{ name: 'home', hash: '#info' }" class="px-5 hover:opacity-70 transition-all py-2 nav">
+                        <router-link :to="{ name: 'home', hash: '#info' }" class="px-5 hover:opacity-70 transition-all py-2 nav outline-gray">
                             Ma'lumot
                         </router-link>
-                        <router-link :to="{ name: 'home', hash: '#contact' }" class="px-5 hover:opacity-70 transition-all py-2 nav">
+                        <router-link :to="{ name: 'home', hash: '#contact' }" class="px-5 hover:opacity-70 transition-all py-2 nav outline-gray">
                             Kontakt
                         </router-link>
                     </nav>
                     <div class="hidden md:flex justify-center items-center gap-5 xl:gap-10 font-gilroy-semibold font-semibold">
-                        <a class="hover:opacity-70 transition-all" href="https://kadirov.dev/login">Kirish</a>
-                        <a target="_blank" href="https://myblog.uz/author/kadirov/">
-                            <KButton class="px-6">Tekin kurslar</KButton>
-                        </a>
+                        <router-link v-if="!userStore.isAuthorized" :to="{ name: 'sign-in' }" class="hover:opacity-70 transition-all outline-gray">
+                            Kirish
+                        </router-link>
+                        <button v-if="userStore.isAuthorized" @click="userStore.clearToken" class="hover:opacity-70 transition-all outline-gray">
+                            Chiqish
+                        </button>
+                        <KAnchorButton class="text-nowrap" target="_blank" href="https://myblog.uz/author/kadirov/">Tekin kurslar</KAnchorButton>
                     </div>
                 </div>
                 <div class="flex items-center justify-between py-[1.875rem] lg:py-10">
@@ -41,7 +47,7 @@
                         Barcha huquqlar himoya himoyalangan. {{ getCurrentYear }}
                     </p>
                     <div class="flex gap-2.5 lg:gap-5">
-                        <a class="group hover:bg-dark transition-all social border flex items-center justify-center rounded-full border-[#d9d9d9] w-[1.5rem] h-[1.5rem] lg:w-[3.125rem] lg:h-[3.125rem]"
+                        <a class="group hover:bg-dark transition-all social border flex items-center justify-center rounded-full border-[#d9d9d9] w-[1.5rem] h-[1.5rem] lg:w-[3.125rem] lg:h-[3.125rem] outline-gray"
                            href="https://www.youtube.com/@kadirovDev"
                            target="_blank">
                             <div class="w-3 lg:w-6 flex justify-center items-center">
@@ -57,7 +63,7 @@
                                 </svg>
                             </div>
                         </a>
-                        <a class="group hover:bg-dark transition-all social border flex items-center justify-center rounded-full border-[#d9d9d9] w-[1.5rem] h-[1.5rem] lg:w-[3.125rem] lg:h-[3.125rem]"
+                        <a class="group hover:bg-dark transition-all social border flex items-center justify-center rounded-full border-[#d9d9d9] w-[1.5rem] h-[1.5rem] lg:w-[3.125rem] lg:h-[3.125rem] outline-gray"
                            href="https://t.me/kadirovDev"
                            target="_blank">
                             <div class="w-3 lg:w-6 flex justify-center items-center">
@@ -71,7 +77,7 @@
                                 </svg>
                             </div>
                         </a>
-                        <a class="group hover:bg-dark transition-all social border flex items-center justify-center rounded-full border-[#d9d9d9] w-[1.5rem] h-[1.5rem] lg:w-[3.125rem] lg:h-[3.125rem]"
+                        <a class="group hover:bg-dark transition-all social border flex items-center justify-center rounded-full border-[#d9d9d9] w-[1.5rem] h-[1.5rem] lg:w-[3.125rem] lg:h-[3.125rem] outline-gray"
                            href="https://facebook.com/kadirovDev"
                            target="_blank">
                             <div class="w-3 lg:w-6 flex justify-center items-center">
@@ -85,7 +91,7 @@
                                 </svg>
                             </div>
                         </a>
-                        <a class="group hover:bg-dark transition-all social border flex items-center justify-center rounded-full border-[#d9d9d9] w-[1.5rem] h-[1.5rem] lg:w-[3.125rem] lg:h-[3.125rem]"
+                        <a class="group hover:bg-dark transition-all social border flex items-center justify-center rounded-full border-[#d9d9d9] w-[1.5rem] h-[1.5rem] lg:w-[3.125rem] lg:h-[3.125rem] outline-gray"
                            href="https://instagram.com/kadirovDev"
                            target="_blank">
                             <div class="w-3 lg:w-6 flex justify-center items-center">
@@ -108,7 +114,7 @@
             <div class="container">
                 <div class="flex items-center justify-between py-6 lg:py-8 font-gilroy-medium text-white">
                     <p class="text-sm md:text-2xl text-center w-full selection:text-dark selection:bg-white">
-                        &copy; KadirovDev, <a class="text-purple selection:text-dark selection:bg-purple" target="_blank" href="https://kadirov.dev/public-offer">Ommaviy offerta</a>
+                        &copy; KadirovDev, <router-link class="text-purple selection:text-dark selection:bg-purple" :to="{ name: 'public-offer' }">Ommaviy offerta</router-link>
                     </p>
                 </div>
             </div>
@@ -120,10 +126,13 @@
 import {computed, ref, watch} from "vue";
 import {useRoute} from "vue-router";
 import KButton from "@/components/UI/KButton.vue";
+import {useUserStore} from "@/stores/modules/user.js";
+import KAnchorButton from "@/components/UI/KAnchorButton.vue";
 
 const currentHash = ref(window.location.hash || '#main');
 
 const route = useRoute()
+const userStore = useUserStore()
 const getCurrentYear = computed(() => new Date().getFullYear())
 
 watch(() => route.hash, newHash => {

@@ -6,8 +6,7 @@
                     <h1 class="leading-tight text-[28px] md:text-[50px] lg:text-[40px] xl:text-[54px] 2xl:text-[65px] font-gilroy-bold text-center lg:text-start"><span class="text-purple font-gilroy-bold selection:bg-purple selection:text-white">Dasturlashni</span> o’rganib <br>Hayotingizni o’zgartiring</h1>
                     <p class="lg:text-2xl font-medium text-center lg:text-start">Biz bilan dasturlashni onlayn tarzda sifatli o’rganing
                         va hayotingizda yangilik oching</p>
-                        <KButton class="px-8 hidden lg:block w-fit self-start">
-                            <a href="https://kadirov.dev/course#payment:~:text=phpStorm-,Kursga%20yozilish,-Kursni%20tanlang" target="_blank">
+                        <router-link class="px-8 hidden lg:flex w-fit self-start h-10 sm:h-12 xl:h-[54px] rounded-10 text-white transition-all outline-gray bg-purple justify-center items-center" :to="{ name: 'courses', params: { slug: 'junior-full-stack-web-developer'} }">
                             <div class="flex font-semibold gap-1 text-lg">
                                 <p>Kursga yozilish</p>
                                 <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -16,23 +15,22 @@
                                     <path d="M14 7.5L19 12.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </div>
-                            </a>
-                        </KButton>
+                        </router-link>
                 </div>
             </div>
             <div class="w-full relative z-10 flex flex-col items-center justify-center">
                 <img class=" my-20 lg:my-0 hidden sm:flex w-full" src="/main-image.webp" alt="main-image">
                 <img class="flex sm:hidden my-10 w-full" src="/main-image-sm.webp" alt="main-image">
-                <KButton class="px-8 mt-7 w-full lg:hidden mb-10">
+                <router-link :to="{ name: 'courses', params: { slug: 'junior-full-stack-web-developer'} }" class="px-8 lg:hidden flex w-full self-start h-10 sm:h-12 xl:h-[54px] rounded-10 text-white transition-all outline-gray bg-purple justify-center items-center">
                     <div class="flex font-semibold justify-center gap-1 lg:text-lg w-full">
-                        <p>Kursga yozilish</p>
+                        <p class="mt-px">Kursga yozilish</p>
                         <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M19 12.5H5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M14 17.5L19 12.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M14 7.5L19 12.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </div>
-                </KButton>
+                </router-link>
             </div>
         </div>
     </section>

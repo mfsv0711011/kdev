@@ -2,47 +2,50 @@
     <div class="text-dark font-semibold sticky z-50 top-0 transition-all" :class="{'shadow bg-white/70 z-50 backdrop-blur-md mb-14': !isTop}">
         <div class="container py-4 2xl:py-10 transition-all" :class="{'py-6 2xl:py-8': isTop, 'py-4 2xl:py-5': !isTop}">
             <header class="w-full flex justify-between items-center">
-                <router-link :to="{ name: 'home', hash: '#main' }">
+                <router-link :to="{ name: 'home', hash: '#main' }" class="outline-gray">
                     <img class="h-10 2xl:h-[52px]" src="/logo-full.svg" alt="logo">
                 </router-link>
                 <nav class="lg:flex justify-center items-center lg:gap-6 2xl:gap-20 hidden">
                     <router-link
                         :class="{'active': currentHash === '#main' && $route.path === '/'}"
-                        class="px-5 hover:opacity-70 transition-all py-2 nav text-nowrap"
+                        class="px-5 hover:opacity-70 transition-all py-2 nav text-nowrap outline-gray"
                         :to="{ name: 'home', hash: '#main' }"
                     >
                         Asosiy ekran
                     </router-link>
                     <router-link
                         :class="{'active': currentHash === '#courses' && $route.path === '/'}"
-                        class="px-5 hover:opacity-70 transition-all py-2 nav"
+                        class="px-5 hover:opacity-70 transition-all py-2 nav outline-gray"
                         :to="{ name: 'home', hash: '#courses' }"
                     >
                         Kurslar
                     </router-link>
                     <router-link
                         :class="{'active': currentHash === '#info' && $route.path === '/'}"
-                        class="px-5 hover:opacity-70 transition-all py-2 nav"
+                        class="px-5 hover:opacity-70 transition-all py-2 nav outline-gray"
                         :to="{ name: 'home', hash: '#info' }"
                     >
                         Ma'lumot
                     </router-link>
                     <router-link
                         :class="{'active': currentHash === '#contact' && $route.path === '/'}"
-                        class="px-5 hover:opacity-70 transition-all py-2 nav"
+                        class="px-5 hover:opacity-70 transition-all py-2 nav outline-gray"
                         :to="{ name: 'home', hash: '#contact' }"
                     >
                         Kontakt
                     </router-link>
                 </nav>
 
-                <div class="lg:flex justify-center items-center lg:gap-5 xl:gap-10 hidden text-lg">
-                    <a href="https://kadirov.dev/login" class="hover:opacity-70 transition-all">Kirish</a>
-                    <a target="_blank" href="https://myblog.uz/author/kadirov/">
-                        <KButton class="px-6 xl:px-11 text-nowrap">Tekin kurslar</KButton>
-                    </a>
+                <div class="lg:flex justify-center items-center lg:gap-2.5 xl:gap-5 hidden text-lg">
+                    <router-link v-if="!userStore.isAuthorized" :to="{ name: 'sign-in' }" class="px-5 hover:opacity-70 transition-all py-2 nav outline-gray">
+                        Kirish
+                    </router-link>
+                    <router-link v-if="userStore.isAuthorized" :to="{ name: 'profile' }" class="px-5 hover:opacity-70 transition-all py-2 nav outline-gray">
+                        Profil
+                    </router-link>
+                    <KAnchorButton target="_blank" href="https://myblog.uz/author/kadirov/">Tekin kurslar</KAnchorButton>
                 </div>
-                <button @click="isOpen = !isOpen" class="lg:hidden">
+                <button @click="isOpen = !isOpen" class="lg:hidden outline-gray">
                     <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M6.87207 15.0003H23.1284" stroke="#222222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M6.87207 15.0003H23.1284" stroke="black" stroke-opacity="0.2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -65,9 +68,11 @@
                     <div v-show="isOpen" class="lg:hidden outer fixed inset-0 h-dvh w-dvw transition">
                         <div class="inner w-full h-full p-4 flex flex-col">
                             <div class="flex justify-between">
-                                <img class="h-10 2xl:h-[52px]" src="/logo-full.svg" alt="logo">
+                                <router-link :to="{ name: 'home', hash: '#main' }" class="outline-gray">
+                                    <img class="h-10 2xl:h-[52px]" src="/logo-full.svg" alt="logo">
+                                </router-link>
 
-                                <button @click="isOpen = false">
+                                <button @click="isOpen = false" class="outline-gray">
                                     <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M22.5 7.5L7.5 22.5" stroke="#323232" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                         <path d="M7.5 7.5L22.5 22.5" stroke="#323232" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -79,7 +84,7 @@
                                 <router-link
                                     @click="isOpen = false"
                                     :class="{'active': currentHash === '#main' && $route.path === '/'}"
-                                    class="w-fit px-5 hover:opacity-70 transition-all py-2 nav text-nowrap"
+                                    class="w-fit px-5 hover:opacity-70 transition-all py-2 nav text-nowrap outline-gray"
                                     :to="{ name: 'home', hash: '#main' }"
                                 >
                                     Asosiy ekran
@@ -87,7 +92,7 @@
                                 <router-link
                                     @click="isOpen = false"
                                     :class="{'active': currentHash === '#courses' && $route.path === '/'}"
-                                    class="w-fit px-5 hover:opacity-70 transition-all py-2 nav"
+                                    class="w-fit px-5 hover:opacity-70 transition-all py-2 nav outline-gray"
                                     :to="{ name: 'home', hash: '#courses' }"
                                 >
                                     Kurslar
@@ -95,7 +100,7 @@
                                 <router-link
                                     @click="isOpen = false"
                                     :class="{'active': currentHash === '#info' && $route.path === '/'}"
-                                    class="w-fit px-5 hover:opacity-70 transition-all py-2 nav"
+                                    class="w-fit px-5 hover:opacity-70 transition-all py-2 nav outline-gray"
                                     :to="{ name: 'home', hash: '#info' }"
                                 >
                                     Ma'lumot
@@ -103,7 +108,7 @@
                                 <router-link
                                     @click="isOpen = false"
                                     :class="{'active': currentHash === '#contact' && $route.path === '/'}"
-                                    class="w-fit px-5 hover:opacity-70 transition-all py-2 nav"
+                                    class="w-fit px-5 hover:opacity-70 transition-all py-2 nav outline-gray"
                                     :to="{ name: 'home', hash: '#contact' }"
                                 >
                                     Kontakt
@@ -112,12 +117,21 @@
 
                             <div class="mt-auto">
                                 <div class="flex gap-4">
-                                    <a class="w-1/2" target="_blank" href="https://myblog.uz/author/kadirov/">
-                                        <KButton class="w-full text-nowrap">Tekin kurslar</KButton>
-                                    </a>
-                                    <button class="w-1/2 bg-[#F5F3F2] h-10 md:h-[54px] rounded-10 text-dark">
+                                    <KAnchorButton class="w-1/2" target="_blank" href="https://myblog.uz/author/kadirov/">Tekin kurslar</KAnchorButton>
+                                    <router-link
+                                        @click="isOpen = false"
+                                        v-if="!userStore.isAuthorized" :to="{ name: 'sign-in' }"
+                                        class="w-1/2 flex justify-center items-center bg-[#F5F3F2] h-10 md:h-[54px] rounded-10 text-dark"
+                                    >
                                         Kirish
-                                    </button>
+                                    </router-link>
+                                    <router-link
+                                        @click="isOpen = false"
+                                        v-if="userStore.isAuthorized" :to="{ name: 'profile' }"
+                                        class="w-1/2 flex justify-center items-center bg-[#F5F3F2] h-10 md:h-[54px] rounded-10 text-dark outline-gray"
+                                    >
+                                        Profil
+                                    </router-link>
                                 </div>
                                 <div class="flex items-center justify-between py-[1.875rem] lg:py-10">
                                     <p class="text-sm font-medium">
@@ -199,12 +213,15 @@ import {onMounted, onUnmounted, ref, watch} from "vue";
 import { useRoute } from "vue-router";
 import KButton from "@/components/UI/KButton.vue";
 import useIsTop from "@/composables/useIsTop.js";
+import {useUserStore} from "@/stores/modules/user.js";
+import KAnchorButton from "@/components/UI/KAnchorButton.vue";
 
 const currentHash = ref(window.location.hash || '#main');
 
 const route = useRoute()
 const isTop = useIsTop()
 const isOpen = ref(false)
+const userStore = useUserStore()
 
 watch(() => route.hash, newHash => {
     currentHash.value = newHash
