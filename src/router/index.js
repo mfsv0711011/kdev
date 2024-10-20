@@ -66,22 +66,22 @@ const router = createRouter({
             redirect: { name: 'my-courses' },
             children: [
                 {
-                    path: '/my-courses',
+                    path: 'my-courses',
                     name: 'my-courses',
                     component: () => import('@/views/profile/MyCourses.vue'),
                 },
                 {
-                    path: '/my-comments',
+                    path: 'my-comments',
                     name: 'my-comments',
                     component: () => import('@/views/profile/MyComments.vue'),
                 },
                 {
-                    path: '/add-comment',
+                    path: 'add-comment',
                     name: 'add-comment',
                     component: () => import('@/views/profile/AddComment.vue'),
                 },
                 {
-                    path: '/settings',
+                    path: 'settings',
                     name: 'settings',
                     component: () => import('@/views/profile/Settings.vue'),
                 }

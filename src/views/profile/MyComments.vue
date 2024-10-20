@@ -8,7 +8,7 @@
                     <th class="text-start py-4 px-5 border-b border-lightGray">#</th>
                     <th class="text-start py-4 px-5 border-b border-lightGray">Izoh</th>
                     <th class="text-start py-4 px-5 border-b border-lightGray">Holati</th>
-                    <th class="text-start py-4 px-5 border-b border-lightGray">Boshqaruv</th>
+                    <th v-if="hasIsNotApproved" class="text-start py-4 px-5 border-b border-lightGray">Boshqaruv</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -40,7 +40,7 @@
                             </svg>
                         </div>
                     </td>
-                    <td class="py-4 px-5 align-top">
+                    <td v-if="hasIsNotApproved" class="py-4 px-5 align-top">
                         <div v-if="!myComment.isApprove" class="flex gap-4 p-0.5">
                             <button @click="openEditPopup(myComment.id)" class="size-7 flex justify-center items-center rounded-full bg-purple group hover:bg-white transition-all">
                                 <svg class="size-4 text-white group-hover:text-purple transition-all" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 36 36">
@@ -138,12 +138,12 @@
         @on-confirm="updateComment"
         title="O’zgartirish"
     >
-        <KTextarea class="mb-5" rows="8" placeholder="Izohni o'zgartirish" size="normal" label="Izohni o'zgartirish" theme="light" v-model="text"/>
+        <KTextarea class="mb-5" :rows="8" placeholder="Izohni o'zgartirish" size="normal" label="Izohni o'zgartirish" theme="light" v-model="text"/>
     </ConfirmPopup>
 </template>
 
 <script setup>
-import {onMounted, ref} from "vue";
+import {computed, onMounted, ref, watch} from "vue";
 import {getUserData} from "@/helpers/getUserDataFromToken.js";
 import MyCommentsTableLoader from "@/components/loaders/MyCommentsTableLoader.vue";
 import MyCommentsCardLoader from "@/components/loaders/MyCommentsCardLoader.vue";
@@ -162,6 +162,7 @@ const isLoadingForDelete = ref(false)
 const isLoadingForEdit = ref(false)
 const isVisibleEditPopup = ref(false)
 const expandedComments = ref(commentStore.getMyComments.models.map(() => false));
+const hasIsNotApproved = computed(() => commentStore.getMyComments.models.some(comment => !comment.isApprove));
 const text = ref('')
 
 const toggleClamp = (index) => {
@@ -215,6 +216,19 @@ const updateComment = () => {
             isLoadingForEdit.value = false
         })
 }
+
+watch(
+    [() => isVisibleEditPopup.value, () => isVisibleDeletePopup.value],
+    (newVal) => {
+        if(newVal.some(val => val)) {
+            document.body.style.overflow = 'hidden'
+            document.body.style.scrollbarGutter = 'stable'
+        } else {
+            document.body.style.overflow =  'auto'
+            document.body.style.scrollbarGutter = 'auto'
+        }
+    }
+)
 
 onMounted(async () => {
     isLoading.value = true

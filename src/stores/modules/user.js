@@ -35,12 +35,14 @@ export const useUserStore = defineStore('userStore', () => {
     }
 
     const refreshToken = (data) =>
-        unAuthorizedClient.post('/users/auth/refreshToken', { refreshToken: data }).then((res) => {
-            state.accessToken = res.data.accessToken
-            state.refreshToken = res.data.refreshToken
-            localStorage.setItem('kadirovdev-accessToken', res.data.accessToken)
-            localStorage.setItem('kadirovdev-refreshToken', res.data.refreshToken)
-        })
+        unAuthorizedClient.post('/users/auth/refreshToken', { refreshToken: data })
+            .then(async (res) => {
+                state.accessToken = await res.data.accessToken
+                state.refreshToken = await res.data.refreshToken
+                localStorage.setItem('kadirovdev-accessToken', res.data.accessToken)
+                localStorage.setItem('kadirovdev-refreshToken', res.data.refreshToken)
+                location.reload()
+            })
 
     const fetchAboutMe = () => authorizedClient.get('/users/about_me').then((res) => (state.user = res.data))
     const fetchMyCourses = () => authorizedClient.get('/users/my_courses')

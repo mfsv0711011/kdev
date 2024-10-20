@@ -13,8 +13,18 @@
                     <div v-for="comment of comments.models" v-if="comments.models.length" :key="comment"
                          class="ml-5 flex-none shadow-md flex flex-col items-start p-4 lg:p-6 gap-2.5 lg:gap-5 bg-white rounded-2xl lg:rounded-[20px] w-[256px] lg:w-[460px]">
                         <div class="gap-4 flex items-center">
-                            <img v-if="comment.image" :src="baseUrl + comment?.image?.filePath" alt="avatar"
-                                 class="size-10 lg:size-[88px] rounded-full object-cover object-center"/>
+                            <img
+                                v-if="comment.image"
+                                :src="baseUrl + comment?.image?.filePath"
+                                alt="avatar"
+                                class="size-10 lg:size-[88px] rounded-full object-cover object-center"
+                            />
+                            <img
+                                v-else-if="comment?.user?.avatar"
+                                :src="baseUrl + comment?.user?.avatar?.filePath"
+                                alt="avatar"
+                                class="size-10 lg:size-[88px] rounded-full object-cover object-center"
+                            />
                             <div v-else class="size-10 lg:size-[88px] rounded-full object-cover object-center">
                                 <svg class="text-lightGray size-full lg-size-[88px] flex-none" height="1em" viewBox="0 0 32 32" width="1em" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M16 8a5 5 0 1 0 5 5a5 5 0 0 0-5-5" fill="currentColor"/>
@@ -25,7 +35,7 @@
                             <div class="flex flex-col lg:gap-2 items-start">
                                 <p class="font-gilroy-semibold lg:text-[26px] text-dark">
                                     {{ `${comment.user.givenName} ${comment.user.familyName}` }}</p>
-                                <p class="font-gilroy-medium text-xs lg:text-[22px] text-lightGray">Junior Developer</p>
+                                <p class="font-gilroy-medium text-xs lg:text-[22px] text-lightGray">{{ selectedComment.user?.courseTypes[0]?.isJunior ? 'Junior Developer' : 'Middle developer' }}</p>
                             </div>
                         </div>
                         <div class="text-start">
@@ -99,8 +109,18 @@
                     </svg>
                 </button>
                 <div class="gap-4 flex items-center pb-5">
-                    <img v-if="selectedComment.image" :src="baseUrl + selectedComment?.image?.filePath" alt="avatar"
-                         class="size-28 lg:size-52 rounded object-cover object-center"/>
+                    <img
+                        v-if="selectedComment.image"
+                        :src="baseUrl + selectedComment?.image?.filePath"
+                        alt="avatar"
+                        class="size-28 lg:size-52 rounded object-cover object-center"
+                    />
+                    <img
+                        v-else-if="selectedComment?.user?.avatar"
+                        :src="baseUrl + selectedComment?.user?.avatar?.filePath"
+                        alt="avatar"
+                        class="size-10 lg:size-[88px] rounded-full object-cover object-center"
+                    />
                     <div v-else class="size-10 lg:size-[88px] rounded-full object-cover object-center">
                         <svg class="text-lightGray size-full lg-size-[88px] flex-none" height="1em" viewBox="0 0 32 32" width="1em" xmlns="http://www.w3.org/2000/svg">
                             <path d="M16 8a5 5 0 1 0 5 5a5 5 0 0 0-5-5" fill="currentColor"/>
@@ -109,9 +129,9 @@
                         </svg>
                     </div>
                     <div class="flex flex-col lg:gap-2 mb-auto">
-                        <p class="font-gilroy-semibold text-3xl lg:text-5xl text-dark">
+                        <p class="font-gilroy-semibold text-2xl lg:text-4xl text-dark">
                             {{ `${selectedComment.user.givenName} ${selectedComment.user.familyName}` }}</p>
-                        <p class="font-gilroy-medium text-lg lg:text-4xl text-lightGray">Junior Developer</p>
+                        <p class="font-gilroy-medium text-lg lg:text-2xl text-lightGray">{{ selectedComment.user?.courseTypes[0]?.isJunior ? 'Junior Developer' : 'Middle developer' }}</p>
                     </div>
                 </div>
                 <div class="text-start mb-4">
@@ -147,8 +167,9 @@ import {formatDate} from "@/helpers/formatData.js";
 import {useUserStore} from "@/stores/modules/user.js";
 import {useToast} from "vue-toastification";
 import {authorizedClient} from "@/services/unAuthorized.js";
+import {useCommentStore} from "@/stores/modules/comment.js";
 
-defineProps({
+const props = defineProps({
     comments: {
         type: Object,
         required: true,
@@ -162,7 +183,6 @@ const userStore = useUserStore()
 const toast = useToast()
 
 const pressLike = (commentId) => {
-    console.log(commentId)
     if(!userStore.isAuthorized) {
         toast.error('Like bosish uchun avtorizatsiyadan o\'tgan bo\'lishingiz kerak.')
     } else {
@@ -170,7 +190,6 @@ const pressLike = (commentId) => {
             .then(() => {
                 emit('onLike')
             })
-        toast.success('Like bosdingiz!')
     }
 }
 
@@ -192,7 +211,6 @@ const selectedComment = ref({})
 const showComment = comment => {
     isOpenCommentModal.value = true
     selectedComment.value = comment
-    console.log(comment)
 }
 
 watch(
@@ -209,6 +227,14 @@ watch(
     (newVal) => {
         document.body.style.overflow = newVal ? 'hidden': 'auto'
     }
+)
+
+watch(
+    () => props.comments,
+    (newVal) => {
+        selectedComment.value = newVal.models.find(comment => comment.id === selectedComment.value.id)
+    },
+    { deep : true }
 )
 </script>
 

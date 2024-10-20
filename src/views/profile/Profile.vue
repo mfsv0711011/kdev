@@ -5,7 +5,7 @@
                 <ProfileSidebarLoader v-if="!userStore.getUser.id"/>
                 <div v-else class="hidden lg:block w-72 flex-none 2xl:w-80 mb-4 pt-20 sticky top-32 h-fit">
                     <div class="relative w-fit mx-auto">
-                        <div class="relative z-20 size-20 md:size-32 xl:size-40 rounded-full bg-white overflow-hidden -mt-10 md:-mt-16 xl:-mt-20 mx-auto">
+                        <div class="relative z-20 size-20 md:size-32 xl:size-40 rounded-full bg-white overflow-hidden -mt-10 md:-mt-16 xl:-mt-20 mx-auto shadow-md">
                             <div v-if="isLoadingForAvatar" class="size-full flex justify-center items-center bg-dark/40">
                                 <svg class="animate-spin size-8 text-purple mx-auto" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
                                     <path fill="currentColor" d="M16 8a7.92 7.92 0 0 0-2.431-5.568A7.78 7.78 0 0 0 5.057.896c-.923.405-1.758.992-2.449 1.712S1.371 4.182 1.011 5.105a7.53 7.53 0 0 0 .115 5.742c.392.892.961 1.7 1.658 2.368S4.307 14.41 5.2 14.758a7.3 7.3 0 0 0 2.799.493a7.16 7.16 0 0 0 6.526-4.547a7 7 0 0 0 .415-1.622l.059.002a1 1 0 0 0 .996-1.083h.004zm-1.589 2.655c-.367.831-.898 1.584-1.55 2.206s-1.422 1.112-2.254 1.434a6.8 6.8 0 0 1-2.608.454a6.68 6.68 0 0 1-4.685-2.065a6.6 6.6 0 0 1-1.38-2.173a6.5 6.5 0 0 1 .116-4.976c.342-.77.836-1.468 1.441-2.044s1.321-1.029 2.092-1.326a6.27 6.27 0 0 1 4.784.116c.74.329 1.41.805 1.963 1.387s.988 1.27 1.272 2.011a6 6 0 0 1 .397 2.32h.004a1 1 0 0 0 .888 1.077a7 7 0 0 1-.481 1.578z"/>
@@ -92,13 +92,13 @@
                                             <path fill="currentColor" d="M16 8a7.92 7.92 0 0 0-2.431-5.568A7.78 7.78 0 0 0 5.057.896c-.923.405-1.758.992-2.449 1.712S1.371 4.182 1.011 5.105a7.53 7.53 0 0 0 .115 5.742c.392.892.961 1.7 1.658 2.368S4.307 14.41 5.2 14.758a7.3 7.3 0 0 0 2.799.493a7.16 7.16 0 0 0 6.526-4.547a7 7 0 0 0 .415-1.622l.059.002a1 1 0 0 0 .996-1.083h.004zm-1.589 2.655c-.367.831-.898 1.584-1.55 2.206s-1.422 1.112-2.254 1.434a6.8 6.8 0 0 1-2.608.454a6.68 6.68 0 0 1-4.685-2.065a6.6 6.6 0 0 1-1.38-2.173a6.5 6.5 0 0 1 .116-4.976c.342-.77.836-1.468 1.441-2.044s1.321-1.029 2.092-1.326a6.27 6.27 0 0 1 4.784.116c.74.329 1.41.805 1.963 1.387s.988 1.27 1.272 2.011a6 6 0 0 1 .397 2.32h.004a1 1 0 0 0 .888 1.077a7 7 0 0 1-.481 1.578z"/>
                                         </svg>
                                     </div>
-                                    <img v-if="userStore.getUser.avatar" :src="baseUrl + userStore.getUser.avatar.contentUrl" alt="avatar" class="w-full absolute z-50"/>
+                                    <img v-if="userStore.getUser.avatar" :src="baseUrl + userStore.getUser.avatar.contentUrl" alt="avatar" class="w-full absolute z-40"/>
                                     <div v-else class="size-full border-2 border-gray/80 rounded-full overflow-hidden">
                                         <div class="size-[75%] -bottom-1/3 rounded-full bg-gray/80 left-1/2 absolute -translate-x-1/2"></div>
                                         <div class="size-[35%] top-4 rounded-full bg-gray/80 left-1/2 absolute -translate-x-1/2"></div>
                                     </div>
                                 </div>
-                                <div class="absolute cursor-pointer group -bottom-2 -right-2 md:bottom-0 md:right-0 size-9 md:size-10 flex justify-center items-center rounded-full z-50 shadow-lg outline-gray">
+                                <div class="absolute cursor-pointer group -bottom-2 -right-2 md:bottom-0 md:right-0 size-9 md:size-10 flex justify-center items-center rounded-full z-40 shadow-lg outline-gray">
                                     <div class="relative cursor-pointer size-full flex justify-center rounded-full items-center bg-white hover:bg-purple transition-all">
                                         <svg class="size-7 md:size-8 cursor-pointer text-dark group-hover:text-white transition-all" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 20 20">
                                             <path fill="currentColor" d="M10 5.5a4.5 4.5 0 1 1-9 0a4.5 4.5 0 0 1 9 0m-4-2a.5.5 0 0 0-1 0V5H3.5a.5.5 0 0 0 0 1H5v1.5a.5.5 0 0 0 1 0V6h1.5a.5.5 0 0 0 0-1H6zm8 .5h-3.207a5.5 5.5 0 0 0-.393-1H14a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-3.6q.476.244 1 .393V14c0 .373.102.722.28 1.02l4.669-4.588a1.5 1.5 0 0 1 2.102 0l4.67 4.588A2 2 0 0 0 16 14V6a2 2 0 0 0-2-2m0 3.5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0m-1 0a.5.5 0 1 0-1 0a.5.5 0 0 0 1 0m-8.012 8.226A2 2 0 0 0 6 16h8c.37 0 .715-.1 1.012-.274l-4.662-4.58a.5.5 0 0 0-.7 0z"/>
@@ -202,7 +202,7 @@ const changeAvatar = (event) => {
                 userStore.changeAvatar(userData.id, { avatar: res.data['@id']})
                     .then(() => {
                         userStore.fetchAboutMe()
-                        toast.error('Rasm muvoffaqili o\'zgartirlidi.')
+                        toast.success('Rasm muvoffaqili o\'zgartirlidi.')
                     })
                     .catch(() => {
                         toast.error('Xatolik yuz berdi.')

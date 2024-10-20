@@ -162,6 +162,7 @@
                                     </div>
                                 </div>
                                 <div v-else class="p-5 bg-white shadow-md rounded flex flex-col gap-4">
+                                    {{checkedCourses}}
                                     <label
                                         v-for="(course, index) of module.getModule.courses"
                                         :key="course.id"
@@ -177,7 +178,14 @@
                                         @mousedown="toggleChecked(index)"
                                     >
                                         <div class="flex items-center gap-4">
-                                            <input :disabled="!course.isActive" type="checkbox" class="invisible absolute" :checked="isChecked(index, course.isActive)" >
+                                            <input
+                                                :disabled="!course.isActive"
+                                                type="checkbox"
+                                                class="invisible absolute"
+                                                :checked="isChecked(index, course.isActive)"
+                                                :value="course.id"
+                                                @change="updateCourses"
+                                            >
                                             <p class="lg:text-xl">{{ index + 1 }} - oy</p>
                                         </div>
                                         <div>
@@ -204,9 +212,81 @@
                         </transition>
                     </div>
                     <div class="w-full flex gap-5 flex-col mt-4 lg:mt-7 justify-center">
-                        <KButton v-if="userStore.isAuthorized" class="text-white w-full lg:w-1/2 font-gilroy-semibold">To’lovni amalga oshirish</KButton>
+                        <KButton v-if="userStore.isAuthorized" @click="bought" class="text-white w-full lg:w-1/2 font-gilroy-semibold">To’lovni amalga oshirish</KButton>
                         <p v-if="isVisibleMessageOfAuthorizing && !userStore.isAuthorized" class="lg:text-xl">Kursga yozilish uchun avval <router-link :to="{ name: 'sign-in' }" class="text-purple font-gilroy-semibold">tizimga kiring</router-link> yoki <router-link :to="{ name: 'sign-up' }" class="text-purple font-gilroy-semibold">ro'yxatdan o'ting</router-link>.</p>
                     </div>
+
+                    <!-- Start Payme Form -->
+                    <form :action="paymeUrl" class="d-none" method="POST">
+
+                        <!-- Payme Cashbox ID  -->
+                        <input :value="paymeLogin" name="merchant" type="hidden"/>
+
+                        <!-- Cost with tiyin -->
+                        <input :value="payme.amount" name="amount" type="hidden"/>
+
+                        <!-- Payment data -->
+                        <input :value="payme.transactionId" name="account[transactionId]" type="hidden"/>
+
+                        <!-- === OPTIONAL DATA === -->
+                        <!-- Language. By default 'ru'. Available options: ru|uz|en -->
+                        <input name="lang" type="hidden" value="uz"/>
+
+                        <!--
+                            Currency. By default '860'. Available options: 643|840|860|978
+                            643 - RUB
+                            840 - USD
+                            860 - UZS
+                            978 - EUR
+                        -->
+                        <input name="currency" type="hidden" value="860"/>
+
+                        <!--
+                            URL to redirecting after payment. By default, payme redirects to URL of Referer header value.
+                            URL may contain that will be replaced by Payme:
+                            :transaction - id of transaction. Can be null if payme couldn't create transaction
+                            :account.{field} - field of account object
+                            For example: https://your-service.com/payme/:transaction
+                        -->
+                        <!--
+                            <input type="hidden" name="callback" value="{{ REDIRECT_URL }}"/>
+                        -->
+
+                        <!-- Redirect timeout after successful payment in milliseconds  -->
+                        <input name="callback_timeout" type="hidden" value="15"/>
+
+                        <!--
+                            Payment description. You can also specify descriptions in few
+                            languages by using description object like name="description[{lang}]".
+                            As {lang} you can use ru, en or uz
+                        -->
+                        <input :value="payme.description" name="description" type="hidden"/>
+
+                        <!--
+                            Details of payment. You can use JSON object encoded by BASE64.
+                            For example:
+                            {
+                                "discount": {
+                                     "title": "discount 5%",
+                                     "price": 10000
+                                },
+                                "shipping": {
+                                      "title": "Shipment to Termez 28/23",
+                                      "price": 500000
+                                },
+                                "items": [
+                                    {
+                                        "title": "Tomato",
+                                        "price": 505000,
+                                        "count": 2
+                                    }
+                                ]
+                            }
+                         -->
+                        <input :value="payme.detail" name="detail" type="hidden"/>
+
+                        <button ref="paymeButton" type="submit">Pay with <b>Payme</b></button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -218,7 +298,7 @@ import HeadingFour from "@/components/UI/HeadingFour.vue";
 import Paragraph from "@/components/UI/Paragraph.vue";
 import { juniorSkills, middleSkills } from '@/constants/courses.js'
 import Skill from "@/components/Skill.vue";
-import {computed, onMounted, ref, watch} from "vue";
+import {computed, onMounted, reactive, ref, watch} from "vue";
 import KRadioButton from "@/components/UI/KRadioButton.vue";
 import HeadingFive from "@/components/UI/HeadingFive.vue";
 import {useRoute} from "vue-router";
@@ -313,6 +393,38 @@ const toggleChecked = (index) => {
     }
 };
 
+// Payme
+const payme = reactive({
+    amount: 0,
+    price: 0,
+    transactionId: 0,
+    description: 'Kompyuter texnologiyalari sohasida maslahat xizmatlari',
+    detail: ''
+})
+
+const detailDto = reactive({
+    items: [
+        {
+            count: 1,
+            title: 'Kompyuter texnologiyalari sohasida maslahat xizmatlari',
+            price: null,
+            code: '10305013001000000',
+            package_code: '1545643',
+            vat_percent: 0
+        }
+    ],
+})
+
+
+const paymeUrl = import.meta.env.VITE_APP_PAYME_URL;
+const paymeLogin = import.meta.env.VITE_APP_PAYME_LOGIN;
+const boughtCourse = reactive({
+    courses: []
+})
+
+const bought = () => {
+
+}
 </script>
 
 <style scoped>
