@@ -97,7 +97,7 @@
                 type="submit"
                 class="rounded flex justify-center items-center"
                 :isLoading
-            >Kirish</KButton>
+            >Ro'yxatdan o'tish</KButton>
             <p class="mb-5 lg:mb-10">
                 Agar allaqachon ro'yxatdan o'tgan bo'lsangiz, tizimga
                 <router-link
@@ -183,7 +183,3 @@ const { value: password } = useField('password')
 const { value: rePassword } = useField('rePassword')
 const { value: publicOffer } = useField('publicOffer')
 </script>
-
-<style scoped>
-
-</style>

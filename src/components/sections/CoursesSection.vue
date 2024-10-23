@@ -197,6 +197,3 @@ const updateActiveTab = value => {
 }
 
 </script>
-
-<style scoped>
-</style>

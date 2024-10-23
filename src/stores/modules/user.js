@@ -31,7 +31,8 @@ export const useUserStore = defineStore('userStore', () => {
     function clearToken() {
         localStorage.removeItem('kadirovdev-accessToken')
         localStorage.removeItem('kadirovdev-refreshToken')
-        location.reload()
+        state.accessToken = null
+        state.refreshToken = null
     }
 
     const refreshToken = (data) =>

@@ -1,22 +1,22 @@
 <template>
     <h3 class="text-2xl lg:text-3xl text-dark font-gilroy-semibold mb-4">Mening izohlarim</h3>
     <div v-if="commentStore.getMyComments.models.length && !isLoading" class="hidden lg:block p-5 rounded w-full bg-white shadow-md">
-        <div class="border border-loaderGray rounded overflow-hidden w-full overflow-x-auto">
-            <table class="table-auto w-full">
-                <thead>
-                <tr class="text-dark lg:text-lg font-gilroy-semibold">
-                    <th class="text-start py-4 px-5 border-b border-lightGray">#</th>
-                    <th class="text-start py-4 px-5 border-b border-lightGray">Izoh</th>
-                    <th class="text-start py-4 px-5 border-b border-lightGray">Holati</th>
-                    <th v-if="hasIsNotApproved" class="text-start py-4 px-5 border-b border-lightGray">Boshqaruv</th>
-                </tr>
+        <div class="rounded overflow-hidden w-full overflow-x-auto">
+            <table class="table-auto w-full border-collapse">
+                <thead class="border border-gray bg-gray">
+                    <tr class="text-white lg:text-lg font-gilroy-semibold">
+                        <th class="text-start py-4 px-5 border-b border-lightGray">#</th>
+                        <th class="text-start py-4 px-5 border-b border-lightGray">Izoh</th>
+                        <th class="text-start py-4 px-5 border-b border-lightGray">Holati</th>
+                        <th v-if="hasIsNotApproved" class="text-start py-4 px-5 border-b border-lightGray">Boshqaruv</th>
+                    </tr>
                 </thead>
-                <tbody>
+                <tbody class="border border-loaderGray">
                 <tr
                     v-if="commentStore.getMyComments.models.length && !isLoading"
                     v-for="(myComment, index) of commentStore.getMyComments.models"
                     :key="myComment.id"
-                    class="even:bg-loaderGray/30 odd:bg-loaderGray/10 text-dark lg:text-lg font-gilroy-semibold"
+                    class="border-b border-loaderGray text-dark lg:text-lg font-gilroy-semibold"
                 >
                     <td class="py-4 px-6 align-top">
                         <div>{{ index + 1 }}</div>
@@ -237,7 +237,3 @@ onMounted(async () => {
         .finally(() => isLoading.value = false)
 })
 </script>
-
-<style scoped>
-
-</style>

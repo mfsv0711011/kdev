@@ -114,7 +114,3 @@ const { value: telegramUsername } = useField('telegramUsername')
 const { value: message } = useField('message')
 
 </script>
-
-<style scoped>
-
-</style>

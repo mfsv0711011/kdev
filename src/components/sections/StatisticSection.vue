@@ -34,7 +34,3 @@ import {computed} from "vue";
 
 const yearsOfExperience = computed(() => new Date().getFullYear() - new Date((new Date().setFullYear(2010))).getFullYear());
 </script>
-
-<style scoped>
-
-</style>

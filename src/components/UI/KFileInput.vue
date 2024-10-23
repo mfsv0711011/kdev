@@ -25,7 +25,3 @@ const clear = () => selectedFile.value = null
 defineExpose({ clear })
 
 </script>
-
-<style scoped>
-
-</style>

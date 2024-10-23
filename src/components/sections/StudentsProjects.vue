@@ -82,7 +82,3 @@ const [emblaRef2] = emblaCarouselVue(
     [AutoScroll({ playOnInit: true, direction: "backward", speed: 1, autoplay: true })]
 )
 </script>
-
-<style scoped>
-
-</style>

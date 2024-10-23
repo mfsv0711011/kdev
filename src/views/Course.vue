@@ -34,7 +34,7 @@
                     <HeadingFive>Kursni tanlang</HeadingFive>
                     <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-7">
                         <KRadioButton
-                            v-for="course of module.getModules.models"
+                            v-for="course of onlyNewModules"
                             :key="course.id" v-model="selectedCourseId"
                             :value="course.id"
                             :label="course.name"
@@ -59,13 +59,13 @@
                             </svg>
                             <p v-if="module.getModule.courses">Boshlanish oyi : {{ module.getModule?.courses[0]?.startMonth.name }}</p>
                         </li>
-                        <li class="flex items-center gap-5 border-b border-[#D4D4D4] py-4 lg:py-7">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="11.9998" cy="11.9998" r="9.00375" fill="#80007F" fill-opacity="0.2"/>
-                                <path d="M8.44141 12.3387L10.6093 14.5066L10.5953 14.4926L15.4863 9.60156" stroke="#80007F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            <p>Dushanba va payshanba kunlari</p>
-                        </li>
+<!--                        <li class="flex items-center gap-5 border-b border-[#D4D4D4] py-4 lg:py-7">-->
+<!--                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">-->
+<!--                                <circle cx="11.9998" cy="11.9998" r="9.00375" fill="#80007F" fill-opacity="0.2"/>-->
+<!--                                <path d="M8.44141 12.3387L10.6093 14.5066L10.5953 14.4926L15.4863 9.60156" stroke="#80007F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>-->
+<!--                            </svg>-->
+<!--                            <p>Dushanba va payshanba kunlari</p>-->
+<!--                        </li>-->
                         <li class="flex items-center gap-5 border-b border-[#D4D4D4] py-4 lg:py-7">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <circle cx="11.9998" cy="11.9998" r="9.00375" fill="#80007F" fill-opacity="0.2"/>
@@ -73,12 +73,21 @@
                             </svg>
                             <p>Soat 20:00 dan 22:00 gacha</p>
                         </li>
-                        <li class="flex items-center gap-5 border-b border-transparent py-4 lg:py-7">
+                        <li v-if="module.getModule.courses.length < 2" class="flex items-center gap-5 border-b border-transparent py-4 lg:py-7">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <circle cx="11.9998" cy="11.9998" r="9.00375" fill="#80007F" fill-opacity="0.2"/>
                                 <path d="M8.44141 12.3387L10.6093 14.5066L10.5953 14.4926L15.4863 9.60156" stroke="#80007F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
-                            <p v-if="module.getModule.courses"><b class="text-purple">{{ module.getModule?.courses[0]?.countOfStudents }} ta</b> bo’sh o’rin qoldi</p>
+                            <div>
+                                <span
+                                    class="font-gilroy-bold text-purple"
+                                    :class="{
+                                        'text-black': showFreePlace(module.getModule?.courses[0]?.countOfStudents, module.getModule?.courses[0]?.members) > 5,
+                                        'text-red-500': showFreePlace(module.getModule?.courses[0]?.countOfStudents, module.getModule?.courses[0]?.members) <= 5,
+                                    }"
+                                >{{ showFreePlace(module.getModule?.courses[0]?.countOfStudents, module.getModule?.courses[0]?.members) }}</span>
+                                ta qoldi.
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -98,7 +107,7 @@
                             <div v-if="selectedPayment === 'fully'" class="w-full grid grid-cols-2 gap-4 md:gap-7">
                                 <p class="text-xl lg:text-[34px] font-gilroy-medium">{{ (coursePriceWithDiscount / 100).toLocaleString('en-US').replace(/,/g, ' ') }} <sub class="font-gilroy text-sm lg:text-2xl">uzs</sub></p>
                                 <p v-if="module.getModule.courses.length && module.getModule.discountPercent" class="text-xl text-lightGray lg:text-[34px] font-gilroy-medium"><span class="line-through">{{ (module.getModule.courses?.reduce((acc, courseItem) => acc + courseItem?.price, 0) / 100).toLocaleString('en-US').replace(/,/g, ' ') }}</span> <sub class="font-gilroy text-sm lg:text-2xl">uzs</sub></p>
-                                <p v-if="module.getModule.discountPercent" class="lg:text-xl text-green-700 col-span-2">Kursni summasini to'liq to'lov qilishda chegirma <span class="underline text-2xl">{{ module.getModule.discountPercent }}%</span></p>
+                                <p v-if="module.getModule.discountPercent && canEnrollCourse.status" class="lg:text-xl text-green-700 col-span-2">Kursni summasini to'liq to'lov qilishda chegirma <span class="underline text-2xl">{{ module.getModule.discountPercent }}%</span></p>
                             </div>
                         </transition>
                         <transition
@@ -161,53 +170,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div v-else class="p-5 bg-white shadow-md rounded flex flex-col gap-4">
-                                    {{checkedCourses}}
-                                    <label
-                                        v-for="(course, index) of module.getModule.courses"
-                                        :key="course.id"
-                                        class="flex relative w-full justify-between items-start group transition-all rounded border border-lightGray/30 p-2.5 lg:p-4 cursor-pointer"
-                                        :class="{
-                                            'bg-purple text-white': isChecked(index, course.isActive),
-                                            'bg-gray/20': isHovered(index),
-                                            'opacity-50': !course.isActive,
-                                            'text-red-500 bg-lightGray/20': !course.isActive
-                                        }"
-                                        @mouseenter="hoverIndex = index"
-                                        @mouseleave="hoverIndex = null"
-                                        @mousedown="toggleChecked(index)"
-                                    >
-                                        <div class="flex items-center gap-4">
-                                            <input
-                                                :disabled="!course.isActive"
-                                                type="checkbox"
-                                                class="invisible absolute"
-                                                :checked="isChecked(index, course.isActive)"
-                                                :value="course.id"
-                                                @change="updateCourses"
-                                            >
-                                            <p class="lg:text-xl">{{ index + 1 }} - oy</p>
-                                        </div>
-                                        <div>
-                                            <div class="border-b border-lightGray/40 w-52">Boshlanish oyi: {{ course.startMonth.name }}</div>
-                                            <div class="border-b border-lightGray/40 w-52">Narxi: {{ course.price }}</div>
-                                            <div class="border-b border-lightGray/40 w-52">
-                                                <div v-if="showFreePlace(course.countOfStudents, course.members) < 0">Ushbu kursda joy qolmadi.</div>
-                                                <div v-else>
-                                                    <span class="text-[#0d6efd] font-gilroy-bold" :class="{'text-blue': isChecked(index, course.isActive)}">{{ course.countOfStudents }}</span>
-                                                    ta joydan
-                                                    <span class="font-gilroy-bold" :class="{'text-black': showFreePlace(course.countOfStudents, course.members) > 5, 'text-red-500': showFreePlace(course.countOfStudents, course.members) <= 5, }">{{ showFreePlace(course.countOfStudents, course.members) }}</span>
-                                                    ta qoldi.
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </label>
-
-                                    <div v-if="totalSumCheckedCourses" class="w-full flex items-center gap-2 ">
-                                        <p class="lg:text-xl">Jami: </p>
-                                        <p class="text-xl lg:text-2xl font-gilroy-medium">{{ (totalSumCheckedCourses / 100).toLocaleString('en-US').replace(/,/g, ' ') }} <sub class="font-gilroy text-sm lg:text-base">uzs</sub></p>
-                                    </div>
-                                </div>
                             </div>
                         </transition>
                     </div>
@@ -217,7 +179,7 @@
                     </div>
 
                     <!-- Start Payme Form -->
-                    <form :action="paymeUrl" class="d-none" method="POST">
+                    <form :action="paymeUrl" class="hidden" method="POST">
 
                         <!-- Payme Cashbox ID  -->
                         <input :value="paymeLogin" name="merchant" type="hidden"/>
@@ -308,9 +270,11 @@ import CoursesRadioButtonLoader from "@/components/loaders/CoursesRadioButtonLoa
 import KButton from "@/components/UI/KButton.vue";
 import {useUserStore} from "@/stores/modules/user.js";
 import CourseRequirementInfoComponent from "@/components/CourseRequirementInfoComponent.vue";
+import { useBoughtCourseStore } from "@/stores/modules/boughtCourse.js";
 
 const module = useModule()
 const userStore = useUserStore()
+const boughtCourseStore = useBoughtCourseStore()
 const route = useRoute()
 const isJuniorRoute = route.params.slug === 'junior-full-stack-web-developer'
 
@@ -335,6 +299,7 @@ const isVisibleMessageOfAuthorizing = computed(() => (module.getModule.courses.l
 
 const selectedCourseId = ref()
 const selectedPayment = ref('fully')
+const paymeButton = ref(null)
 
 watch(selectedCourseId, () => {
     module.fetchModule(selectedCourseId.value)
@@ -355,43 +320,18 @@ const showFreePlace = (countOfStudents, members) => {
 
 onMounted(async () => {
     await module.fetchModules({ isArchive: false, courseType: isJuniorRoute ? 'web-junior' : 'web-middle' })
-    selectedCourseId.value = module.getModules.models[0]?.id
+    selectedCourseId.value = onlyNewModules.value[0].id
 })
 
 
-const hoverIndex = ref(null);
-const checkedCourses = ref([]);
-const allPricesCheckedCourses = computed(() => checkedCourses.value.map(checkedCourse => module.getModule.courses[checkedCourse].price));
-const totalSumCheckedCourses = computed(() => allPricesCheckedCourses.value.length ? allPricesCheckedCourses.value.reduce((a, b) => a + b) : 0);
-
-const clearCheckedCourses = () => {
-    checkedCourses.value = []
-}
-
-const isHovered = index => {
-    if (hoverIndex.value === null || checkedCourses.value.includes(index)) return false;
-
-    for (let i = 0; i <= hoverIndex.value; i++) {
-        if (i === index && module.getModule.courses[i].isActive) {
-            return true;
-        }
+const onlyNewModules = computed(() => module.getModules.models.filter(moduleItem => moduleItem.courses.length < 2 && moduleItem.courses[0].isActive));
+const canEnrollCourse = computed(() => {
+    if (module.getModule.courses.length === 1 && !module.getModule.courses[0].isActive) {
+        return { status: false, reason: 'Ushbu kursga yozilish to\'xtatilgan.' }
     }
-    return false;
-};
 
-const isChecked = (index, isActive) => isActive ? checkedCourses.value.includes(index) : false
-
-const toggleChecked = (index) => {
-    if (checkedCourses.value.includes(index)) {
-        checkedCourses.value = checkedCourses.value.filter(i => i !== index && i < index);
-    } else {
-        for (let i = 0; i <= index; i++) {
-            if (module.getModule.courses[i].isActive && !checkedCourses.value.includes(i)) {
-                checkedCourses.value.push(i);
-            }
-        }
-    }
-};
+    return { status: true }
+});
 
 // Payme
 const payme = reactive({
@@ -423,10 +363,24 @@ const boughtCourse = reactive({
 })
 
 const bought = () => {
-
+    boughtCourseStore.pushBoughtCourse({
+        courses: module.getModule.courses.map(item => item.id),
+        promo: '',
+        hasDiscount: true
+    })
+        .then(() => {
+            console.log(boughtCourseStore.getBoughtCourses)
+            payme.amount = 0
+            boughtCourseStore.getBoughtCourses.forEach((boughtCourse) => {
+                payme.amount += boughtCourse.price
+            })
+            payme.transactionId = boughtCourseStore.getBoughtCourses[0].paymeTransaction
+            payme.description = 'Dasturchi maslahati uchun to\'lov'
+            detailDto.items[0].price = payme.amount
+            payme.detail = btoa(JSON.stringify(detailDto))
+        })
+        .then(() => {
+            paymeButton.value.click()
+        })
 }
 </script>
-
-<style scoped>
-
-</style>

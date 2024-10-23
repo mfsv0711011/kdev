@@ -24,7 +24,3 @@ const offerList = [
     'Ofertani qabul qilish bilan birga, barcha topshiriqlarni o\'z vaqtida bajarish, darslarni jiddiy sababsiz qoldirmaslik majburiyatini o\'z zimmangizga olgan bo\'lasiz.'
 ]
 </script>
-
-<style scoped>
-
-</style>

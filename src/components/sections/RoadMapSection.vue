@@ -129,7 +129,3 @@ const steps2 = [
     { name: 'Step 3', href: '#', status: 'upcoming' },
 ]
 </script>
-
-<style scoped>
-
-</style>
