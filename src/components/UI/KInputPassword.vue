@@ -62,7 +62,3 @@ const isVisible = ref(false)
 
 const toggle = () => isVisible.value = !isVisible.value
 </script>
-
-<style scoped>
-
-</style>

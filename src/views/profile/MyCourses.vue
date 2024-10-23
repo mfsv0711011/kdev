@@ -2,21 +2,21 @@
     <div>
         <h3 class="text-2xl lg:text-3xl text-dark font-gilroy-semibold mb-4">Mening kurslarim</h3>
         <div v-if="userStore.getMyCourses.models.length && !isLoading" class="hidden lg:block p-5 rounded w-full bg-white shadow-md">
-            <div class="border border-loaderGray rounded overflow-hidden w-full overflow-x-auto">
-                <table class="table-auto w-full">
-                    <thead>
-                    <tr class="text-dark lg:text-lg font-gilroy-semibold">
-                        <th class="text-start py-4 px-6 border-b border-lightGray">#</th>
-                        <th class="text-start py-4 px-5 border-b border-lightGray">Nomi</th>
-                        <th class="text-start py-4 px-5 border-b border-lightGray">Boshlanish vaqti</th>
-                        <th class="text-start py-4 px-5 border-b border-lightGray">Telegram guruh linki</th>
+            <div class="rounded overflow-hidden w-full overflow-x-auto">
+                <table class="table-auto w-full border-collapse">
+                    <thead class="bg-gray border border-gray">
+                    <tr class="text-white lg:text-lg font-gilroy-semibold">
+                        <th class="text-start py-4 px-6">#</th>
+                        <th class="text-start py-4 px-5">Nomi</th>
+                        <th class="text-start py-4 px-5">Boshlanish vaqti</th>
+                        <th class="text-start py-4 px-5">Telegram guruh linki</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="border border-loaderGray">
                     <tr
                         v-for="(myCourse, index) of userStore.getMyCourses.models"
                         :key="myCourse.id"
-                        class="even:bg-loaderGray/30 odd:bg-loaderGray/10 text-dark lg:text-lg font-gilroy-semibold"
+                        class="border-b border-gray/20 text-dark lg:text-lg font-gilroy-semibold"
                     >
                         <td class="py-4 px-6">{{ index + 1 }}</td>
                         <td class="py-4 px-5">{{ myCourse.course.name }}</td>
@@ -84,7 +84,3 @@ onMounted(() => {
         .finally(() => isLoading.value = false)
 })
 </script>
-
-<style scoped>
-
-</style>

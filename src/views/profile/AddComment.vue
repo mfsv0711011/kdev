@@ -81,7 +81,3 @@ onMounted(async () => {
         .finally(() => isLoading.value = false)
 })
 </script>
-
-<style scoped>
-
-</style>

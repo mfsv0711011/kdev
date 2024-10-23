@@ -139,7 +139,3 @@ watch(() => route.hash, newHash => {
     currentHash.value = newHash
 })
 </script>
-
-<style scoped>
-
-</style>

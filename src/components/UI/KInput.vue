@@ -98,7 +98,3 @@ const calculatedType = computed(() => props.type === 'password' ? isVisible.valu
 
 const toggle = () => isVisible.value = !isVisible.value
 </script>
-
-<style scoped>
-
-</style>

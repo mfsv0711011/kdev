@@ -6,9 +6,3 @@
         </div>
     </div>
 </template>
-
-<script setup>
-
-import HeadingFive from "@/components/UI/HeadingFive.vue";
-import KRadioButton from "@/components/UI/KRadioButton.vue";
-</script>

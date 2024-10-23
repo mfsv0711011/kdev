@@ -36,11 +36,4 @@
     </section>
 </template>
 
-<script setup>
-
-import KButton from "@/components/UI/KButton.vue";
-import KInput from "@/components/UI/KInput.vue";
-</script>
-
-<style scoped>
-</style>
+<script setup></script>

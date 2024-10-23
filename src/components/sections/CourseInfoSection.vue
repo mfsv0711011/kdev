@@ -329,6 +329,3 @@ const middleCourseThemes = [
     },
 ]
 </script>
-
-<style scoped>
-</style>

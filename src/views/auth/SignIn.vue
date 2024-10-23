@@ -65,7 +65,3 @@ const signIn = () => {
         .finally(() => isLoading.value = false)
 }
 </script>
-
-<style scoped>
-
-</style>
