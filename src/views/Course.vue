@@ -40,7 +40,6 @@
                             :label="course.name"
                             :sup="course.discountPercent ? course.discountPercent + '%' : ''"
                             name="course"
-                            @change="clearCheckedCourses"
                         />
                     </div>
                 </div>
@@ -174,7 +173,7 @@
                         </transition>
                     </div>
                     <div class="w-full flex gap-5 flex-col mt-4 lg:mt-7 justify-center">
-                        <KButton v-if="userStore.isAuthorized" @click="bought" class="text-white w-full lg:w-1/2 font-gilroy-semibold">To’lovni amalga oshirish</KButton>
+                        <KButton v-if="userStore.isAuthorized && selectedPayment === 'fully'" @click="bought" class="text-white w-full lg:w-1/2 font-gilroy-semibold">To’lovni amalga oshirish</KButton>
                         <p v-if="isVisibleMessageOfAuthorizing && !userStore.isAuthorized" class="lg:text-xl">Kursga yozilish uchun avval <router-link :to="{ name: 'sign-in' }" class="text-purple font-gilroy-semibold">tizimga kiring</router-link> yoki <router-link :to="{ name: 'sign-up' }" class="text-purple font-gilroy-semibold">ro'yxatdan o'ting</router-link>.</p>
                     </div>
 
@@ -263,7 +262,7 @@ import Skill from "@/components/Skill.vue";
 import {computed, onMounted, reactive, ref, watch} from "vue";
 import KRadioButton from "@/components/UI/KRadioButton.vue";
 import HeadingFive from "@/components/UI/HeadingFive.vue";
-import {useRoute} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 import {useModule} from "@/stores/modules/temp/module.js";
 import PaymentLoader from "@/components/loaders/PaymentLoader.vue";
 import CoursesRadioButtonLoader from "@/components/loaders/CoursesRadioButtonLoader.vue";
@@ -271,11 +270,13 @@ import KButton from "@/components/UI/KButton.vue";
 import {useUserStore} from "@/stores/modules/user.js";
 import CourseRequirementInfoComponent from "@/components/CourseRequirementInfoComponent.vue";
 import { useBoughtCourseStore } from "@/stores/modules/boughtCourse.js";
+import {getUserData} from "@/helpers/getUserDataFromToken.js";
 
 const module = useModule()
 const userStore = useUserStore()
 const boughtCourseStore = useBoughtCourseStore()
 const route = useRoute()
+const router = useRouter()
 const isJuniorRoute = route.params.slug === 'junior-full-stack-web-developer'
 
 const juniorCourse = {
@@ -294,7 +295,7 @@ const middleCourse = {
 
 const course = computed(() => isJuniorRoute ? juniorCourse : middleCourse)
 const coursePriceWithDiscount = computed(() => (module.getModule.courses?.reduce((acc, courseItem) => acc + courseItem?.price, 0) - (module.getModule.courses.reduce((acc, courseItem) => acc + courseItem?.price, 0) * (module.getModule.discountPercent / 100))) || module.getModule.courses.reduce((acc, courseItem) => acc + courseItem?.price, 0))
-const moduleTeacherFullName = computed(() => module.getModule?.courses[0]?.teacher?.givenName + ' ' + module.getModule?.courses[0]?.teacher?.familyName)
+const moduleTeacherFullName = computed(() => !module.getModule?.courses[0]?.teacher ? 'Akmal Kadirovning metodikasi bo’yicha u kishining shogirdi dars o’tadi.' : module.getModule?.courses[0]?.teacher?.givenName + ' ' + module.getModule?.courses[0]?.teacher?.familyName)
 const isVisibleMessageOfAuthorizing = computed(() => (module.getModule.courses.length === 1 && selectedPayment.value === 'fully') || module.getModule.courses.length > 1)
 
 const selectedCourseId = ref()
@@ -320,7 +321,7 @@ const showFreePlace = (countOfStudents, members) => {
 
 onMounted(async () => {
     await module.fetchModules({ isArchive: false, courseType: isJuniorRoute ? 'web-junior' : 'web-middle' })
-    selectedCourseId.value = onlyNewModules.value[0].id
+    selectedCourseId.value = onlyNewModules.value[0]?.id
 })
 
 
@@ -362,25 +363,30 @@ const boughtCourse = reactive({
     courses: []
 })
 
-const bought = () => {
-    boughtCourseStore.pushBoughtCourse({
-        courses: module.getModule.courses.map(item => item.id),
-        promo: '',
-        hasDiscount: true
-    })
-        .then(() => {
-            console.log(boughtCourseStore.getBoughtCourses)
-            payme.amount = 0
-            boughtCourseStore.getBoughtCourses.forEach((boughtCourse) => {
-                payme.amount += boughtCourse.price
+const bought = async () => {
+    await userStore.fetchAboutMe()
+    if(!userStore.hasPini) {
+        await router.push({name: 'set-pini'})
+    } else {
+        boughtCourseStore.pushBoughtCourse({
+            courses: module.getModule.courses.map(item => item.id),
+            promo: '',
+            hasDiscount: true
+        })
+            .then(() => {
+                console.log(boughtCourseStore.getBoughtCourses)
+                payme.amount = 0
+                boughtCourseStore.getBoughtCourses.forEach((boughtCourse) => {
+                    payme.amount += boughtCourse.price
+                })
+                payme.transactionId = boughtCourseStore.getBoughtCourses[0].paymeTransaction
+                payme.description = 'Dasturchi maslahati uchun to\'lov'
+                detailDto.items[0].price = payme.amount
+                payme.detail = btoa(JSON.stringify(detailDto))
             })
-            payme.transactionId = boughtCourseStore.getBoughtCourses[0].paymeTransaction
-            payme.description = 'Dasturchi maslahati uchun to\'lov'
-            detailDto.items[0].price = payme.amount
-            payme.detail = btoa(JSON.stringify(detailDto))
-        })
-        .then(() => {
-            paymeButton.value.click()
-        })
+            .then(() => {
+                paymeButton.value.click()
+            })
+    }
 }
 </script>

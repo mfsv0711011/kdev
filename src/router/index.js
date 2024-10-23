@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { defineAsyncComponent } from "vue";
 import {useUserStore} from "@/stores/modules/user.js";
+import {getUserData} from "@/helpers/getUserDataFromToken.js";
 
 const ifAuthorized = (from, to, next) => {
     const userStore = useUserStore()
@@ -56,6 +57,15 @@ const router = createRouter({
             component: () => import('@/views/ForgotPassword.vue'),
         },
         {
+            path: '/reset-password/:resetToken',
+            name: 'reset-password',
+            props: true,
+            meta: {
+                layout: defineAsyncComponent(() => import('@/layouts/AuthLayout.vue')),
+            },
+            component: () => import('@/views/ResetPassword.vue'),
+        },
+        {
             path: '/profile',
             name: 'profile',
             meta: {
@@ -95,6 +105,25 @@ const router = createRouter({
             },
             component: () => import('@/views/PublicOffer.vue'),
         },
+        {
+            path: '/set-pini',
+            name: 'set-pini',
+            meta: {
+                layout: defineAsyncComponent(() => import('@/layouts/AuthLayout.vue')),
+            },
+            component: () => import('@/views/SetPini.vue'),
+            beforeEnter: async (to, from, next) => {
+                const userStore = useUserStore()
+                const userData = await getUserData()
+
+                if (userStore.isAuthorized && !userData.pini) {
+                    next()
+                } else {
+                    console.log(from, to)
+                    next(from.path)
+                }
+            }
+        },
     ],
     scrollBehavior(to, from, savedPosition) {
         if (savedPosition) {
@@ -118,7 +147,7 @@ const router = createRouter({
             // Agar hash yoki savedPosition mavjud bo'lmasa, yuqoriga ko'taradi
             return { top: 0 };
         }
-    }
+    },
 })
 
 export default router

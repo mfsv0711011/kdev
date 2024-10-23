@@ -1,6 +1,5 @@
 <template>
     <AuthFrame>
-        <pre v-if="err">{{ err }}</pre>
         <form @submit.prevent="signIn" class="sm:col-span-4 sm:col-start-2 xl:col-span-2 xl:col-start-3 flex flex-col gap-4 lg:gap-7 w-full">
             <router-link :to="{ name: 'home' }" class="mb-4 lg:mb-8 w-fit mx-auto focus:ring-2 focus:ring-gray outline-none">
                 <img class="h-10 lg:h-14" src="/logo-full.svg" alt="logo">

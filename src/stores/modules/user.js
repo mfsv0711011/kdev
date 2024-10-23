@@ -19,6 +19,9 @@ export const useUserStore = defineStore('userStore', () => {
 
     const pushUser = (data) => unAuthorizedClient.post('/users', data).then((res) => state.user = res.data)
     const putUser = (data, userId) => authorizedClient.put('/users/' + userId , data)
+    const resetPassword = (data) => unAuthorizedClient.post('/users/reset_password', data)
+    const checkResetToken = (data) => unAuthorizedClient.post('/users/check_reset_token', data)
+    const sendRequestForResetPassword = (data) => unAuthorizedClient.post('/users/request_reset_password', data)
 
     const fetchToken = (data) =>
         unAuthorizedClient.post('/users/auth', data).then((res) => {
@@ -53,19 +56,25 @@ export const useUserStore = defineStore('userStore', () => {
         })
 
     const changeAvatar = (id, data) => authorizedClient.put(`/users/${id}/avatar`, data)
+    const setPini = (id, data) => authorizedClient.put(`/users/${id}/pini`, data)
 
     return {
         pushUser,
         putUser,
+        resetPassword,
+        checkResetToken,
+        sendRequestForResetPassword,
         fetchToken,
         clearToken,
         refreshToken,
         fetchAboutMe,
         fetchMyCourses,
         changeAvatar,
+        setPini,
         getAccessToken: computed(() => localStorage.getItem('kadirovdev-accessToken')),
         getRefreshToken: computed(() => localStorage.getItem('kadirovdev-refreshToken')),
         isAuthorized: computed(() => !!state.accessToken),
+        hasPini: computed(() => state.user?.pini !== undefined && state.user?.pini !== null),
         getUser: computed(() => state.user),
         getMyCourses: computed(() => state.myCourses),
     }
