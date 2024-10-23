@@ -14,3 +14,4 @@ createApp(App)
         timeout: 2000
     })
     .mount('#app')
+
