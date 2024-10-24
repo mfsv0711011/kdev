@@ -359,9 +359,6 @@ const detailDto = reactive({
 
 const paymeUrl = import.meta.env.VITE_APP_PAYME_URL;
 const paymeLogin = import.meta.env.VITE_APP_PAYME_LOGIN;
-const boughtCourse = reactive({
-    courses: []
-})
 
 const bought = async () => {
     await userStore.fetchAboutMe()
