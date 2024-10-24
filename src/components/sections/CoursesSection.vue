@@ -48,7 +48,7 @@
                             </ul>
                             <h4 class="text-xl lg:text-[30px] font-gilroy-semibold animation-fade-in">Kursdan maqsad</h4>
                             <ul class="list-disc ml-6 flex flex-col gap-1 pt-2">
-                                <li class="animation-fade-in">5 oy mobaynida sizga 10 dan ortiq texnologiyalarni o’rgatish. Sizni mustaqil ishlay oladigan professional dasturchiga aylantirish.y</li>
+                                <li class="animation-fade-in">5 oy mobaynida sizga 10 dan ortiq texnologiyalarni o’rgatish. Sizni mustaqil ishlay oladigan professional dasturchiga aylantirish.</li>
                             </ul>
                         </div>
                         <div class="grid lg:hidden grid-cols-2 sm:grid-cols-3 gap-2.5 lg:gap-[30px]">

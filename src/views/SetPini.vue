@@ -1,23 +1,30 @@
 <template>
     <AuthFrame>
-        <form @submit.prevent="setPini" class="py-6 sm:col-span-4 sm:col-start-2 xl:col-span-2 xl:col-start-3 flex flex-col gap-4 lg:gap-7 w-full">
-            <router-link :to="{ name: 'home' }" class="mb-4 lg:mb-8 w-fit mx-auto focus:ring-2 focus:ring-gray outline-none">
-                <img class="h-10 lg:h-14" src="/logo-full.svg" alt="logo">
-            </router-link>
-            <HeadingFive class="text-center">JSHSHIR'ni kiritish</HeadingFive>
-            <img src="/jshshir.jpg" alt="JSHSHIR rasmi">
-            <KInput
-                type="text"
-                v-model="pini"
-                size="normal"
-                theme="light"
-                label="JSHSHIR"
-                placeholder="JSHSHIR'ni kiriting..."
-                no-animation
-                :error-message="errors.pini"
-            />
-            <KButton type="submit" class="rounded flex justify-center items-center" :isLoading :isDisabled>Kirish</KButton>
-        </form>
+        <div class="sm:col-span-6 flex flex-col md:flex-row gap-14 items-center w-full">
+            <div class="w-7/12 select-none hidden md:block p-4 bg-white rounded shadow-lg">
+                <img src="/jshshir.jpg" alt="JSHSHIR rasmi" class="w-full">
+            </div>
+            <form @submit.prevent="setPini" class="py-6 flex flex-col gap-4 lg:gap-7 lg:w-5/12">
+                <router-link :to="{ name: 'home' }" class="mb-4 lg:mb-8 w-fit mx-auto focus:ring-2 focus:ring-gray outline-none">
+                    <img class="h-10 lg:h-14" src="/logo-full.svg" alt="logo">
+                </router-link>
+                <HeadingFive class="text-center">JSHSHIR'ni kiritish</HeadingFive>
+                <div class="select-none md:hidden p-4 bg-white rounded shadow-md w-full">
+                    <img src="/jshshir.jpg" alt="JSHSHIR rasmi" class="select-none md:hidden block w-full">
+                </div>
+                <KInput
+                    type="text"
+                    v-model="pini"
+                    size="normal"
+                    theme="light"
+                    label="JSHSHIR"
+                    placeholder="JSHSHIR'ni kiriting..."
+                    no-animation
+                    :error-message="errors.pini"
+                />
+                <KButton type="submit" class="rounded flex justify-center items-center" :isLoading :isDisabled>Kiritish</KButton>
+            </form>
+        </div>
     </AuthFrame>
 </template>
 
@@ -42,7 +49,12 @@ const isDisabled = computed(() => !pini.value)
 
 // Validation
 const schema = object({
-    pini: string().required('Qatorni to\'diring.').length(14, 'JSHSHIR 14ta belgidan iborat bo\'lishi kerak.'),
+    pini: string()
+        .required('Qatorni to\'diring.')
+        .test('is-valid-pini', 'JSHSHIR faqat raqamlardan iborat bo\'lishi kerak', val => {
+            return val.trim().match(/^\d+$/)
+        })
+        .length(14, 'JSHSHIR 14ta belgidan iborat bo\'lishi kerak.')
 })
 
 const { handleSubmit, errors } = useForm({ validationSchema: schema })
@@ -50,7 +62,6 @@ const { handleSubmit, errors } = useForm({ validationSchema: schema })
 const setPini = handleSubmit(async (values) => {
     const userData = await getUserData()
 
-    console.log(values)
     isLoading.value = true
     userStore.setPini(userData.id, values)
         .then(() => {
