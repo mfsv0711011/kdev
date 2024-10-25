@@ -6,7 +6,10 @@
                     <h1 class="leading-tight text-[28px] md:text-[50px] lg:text-[40px] xl:text-[54px] 2xl:text-[65px] font-gilroy-bold text-center lg:text-start"><span class="text-purple font-gilroy-bold selection:bg-purple selection:text-white">Dasturlashni</span> o’rganib <br>Hayotingizni o’zgartiring</h1>
                     <p class="lg:text-2xl font-medium text-center lg:text-start">Biz bilan dasturlashni onlayn tarzda sifatli o’rganing
                         va hayotingizda yangilik oching</p>
-                        <router-link class="px-8 hidden lg:flex w-fit self-start h-10 sm:h-12 xl:h-[54px] rounded-10 text-white transition-all outline-gray bg-purple justify-center items-center" :to="{ name: 'courses', params: { slug: 'junior-full-stack-web-developer'} }">
+                        <router-link
+                            :to="{ name: 'home', hash: '#courses' }"
+                            class="px-8 hidden lg:flex w-fit self-start h-10 sm:h-12 xl:h-[54px] rounded-10 text-white transition-all outline-gray bg-purple justify-center items-center"
+                        >
                             <div class="flex font-semibold gap-1 text-lg">
                                 <p>Kursga yozilish</p>
                                 <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -21,7 +24,10 @@
             <div class="w-full relative z-10 flex flex-col items-center justify-center">
                 <img class=" my-20 lg:my-0 hidden sm:flex w-full" src="/main-image.webp" alt="main-image">
                 <img class="flex sm:hidden my-10 w-full" src="/main-image-sm.webp" alt="main-image">
-                <router-link :to="{ name: 'courses', params: { slug: 'junior-full-stack-web-developer'} }" class="px-8 lg:hidden flex w-full self-start h-10 sm:h-12 xl:h-[54px] rounded-10 text-white transition-all outline-gray bg-purple justify-center items-center">
+                <router-link
+                    :to="{ name: 'home', hash: '#courses' }"
+                    class="px-8 lg:hidden flex w-full self-start h-10 sm:h-12 xl:h-[54px] rounded-10 text-white transition-all outline-gray bg-purple justify-center items-center"
+                >
                     <div class="flex font-semibold justify-center gap-1 lg:text-lg w-full">
                         <p class="mt-px">Kursga yozilish</p>
                         <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">

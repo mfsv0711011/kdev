@@ -4,7 +4,7 @@
             <div class="container">
                 <div class="flex items-center justify-between py-12 border-b border-[#DFDFDF]">
                     <div class="flex flex-col gap-5 justify-start">
-                        <router-link :to="{ name: 'home' }" class="outline-gray">
+                        <router-link :to="{ name: 'home', hash: '#main' }" class="outline-gray">
                             <img alt="logo" class="h-10 lg:h-16" src="/logo-full.svg">
                         </router-link>
                         <div class="flex justify-start items-start gap-5 xl:gap-10 font-semibold flex-col md:hidden">

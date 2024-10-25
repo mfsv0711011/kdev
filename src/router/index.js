@@ -54,7 +54,7 @@ const router = createRouter({
             meta: {
                 layout: defineAsyncComponent(() => import('@/layouts/AuthLayout.vue')),
             },
-            component: () => import('@/views/ForgotPassword.vue'),
+            component: () => import('@/views/auth/ForgotPassword.vue'),
         },
         {
             path: '/reset-password/:resetToken',
@@ -63,7 +63,7 @@ const router = createRouter({
             meta: {
                 layout: defineAsyncComponent(() => import('@/layouts/AuthLayout.vue')),
             },
-            component: () => import('@/views/ResetPassword.vue'),
+            component: () => import('@/views/auth/ResetPassword.vue'),
         },
         {
             path: '/profile',

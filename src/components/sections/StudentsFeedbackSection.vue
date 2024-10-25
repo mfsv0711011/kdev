@@ -3,6 +3,7 @@
         <div class="container">
             <div class="gap-4 lg:gap-5 text-center mb-16 animation-fade-in">
                 <HeadingOne>O’quvchilarimizni kurs haqidagi fikri</HeadingOne>
+                {{comments.totalItems}} {{comments.models.length}}
 <!--                <HeadingTwo>Har bir kurs vaqtida o’quvchilar bajargan amaliyot ishlari</HeadingTwo>-->
                 <div class="my-10"></div>
             </div>
@@ -35,7 +36,7 @@
                             <div class="flex flex-col lg:gap-2 items-start">
                                 <p class="font-gilroy-semibold lg:text-[26px] text-dark">
                                     {{ `${comment.user.givenName} ${comment.user.familyName}` }}</p>
-                                <p class="font-gilroy-medium text-xs lg:text-[22px] text-lightGray">{{ selectedComment.user?.courseTypes[0]?.isJunior ? 'Junior Developer' : 'Middle developer' }}</p>
+                                <p class="font-gilroy-medium text-xs lg:text-[22px] text-lightGray">{{ selectedComment?.user?.courseTypes[0]?.isJunior ? 'Junior Developer' : 'Middle developer' }}</p>
                             </div>
                         </div>
                         <div class="text-start">
@@ -232,7 +233,7 @@ watch(
 watch(
     () => props.comments,
     (newVal) => {
-        selectedComment.value = newVal.models.find(comment => comment.id === selectedComment.value.id)
+        selectedComment.value = newVal.models.find(comment => comment.id === selectedComment.value?.id)
     },
     { deep : true }
 )
