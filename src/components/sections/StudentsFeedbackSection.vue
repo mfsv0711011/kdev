@@ -132,7 +132,7 @@
                     <div class="flex flex-col lg:gap-2 mb-auto">
                         <p class="font-gilroy-semibold text-2xl lg:text-4xl text-dark">
                             {{ `${selectedComment.user.givenName} ${selectedComment.user.familyName}` }}</p>
-                        <p class="font-gilroy-medium text-lg lg:text-2xl text-lightGray">{{ selectedComment.user?.courseTypes[0]?.isJunior ? 'Junior Developer' : 'Middle developer' }}</p>
+                        <p class="font-gilroy-medium text-lg lg:text-2xl text-lightGray">{{ selectedComment.user?.courseTypes.length ? selectedComment.user?.courseTypes[0]?.isJunior ? 'Junior Developer' : 'Middle developer' : 'Student' }}</p>
                     </div>
                 </div>
                 <div class="text-start mb-4">
