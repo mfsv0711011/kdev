@@ -36,7 +36,7 @@
                             <div class="flex flex-col lg:gap-2 items-start">
                                 <p class="font-gilroy-semibold lg:text-[26px] text-dark">
                                     {{ `${comment.user.givenName} ${comment.user.familyName}` }}</p>
-                                <p class="font-gilroy-medium text-xs lg:text-[22px] text-lightGray">{{ selectedComment?.user?.courseTypes[0]?.isJunior ? 'Junior Developer' : 'Middle developer' }}</p>
+                                <p class="font-gilroy-medium text-xs lg:text-[22px] text-lightGray">{{ selectedComment.user?.courseTypes.length ? selectedComment.user?.courseTypes[0]?.isJunior ? 'Junior Developer' : 'Middle developer' : 'Student' }}</p>
                             </div>
                         </div>
                         <div class="text-start">
